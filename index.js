@@ -7,6 +7,8 @@ import morgan from 'morgan';
 
 // internal import
 import connectDb from './config/db.js';
+import errorHandler from './middlewares/errorHandler.js';
+import authRoutes from './routes/authRoutes.js';
 
 // config dotenv
 dotenv.config();
@@ -29,8 +31,26 @@ app.use(cors());
 app.use(morgan('dev'));
 
 // route
+app.use('/api/v1/auth', authRoutes);
+
 app.get('/', (req, res) => {
-  res.json('hello world');
+  res.send('Hello');
+});
+
+// error handler || mongodb related
+app.use(errorHandler);
+
+// common error handler
+app.use((err, req, res, next) => {
+  console.log(err);
+  if (res.headersSent) {
+    return next();
+  } else {
+    return res.status(500).json({
+      success: false,
+      error: err?.message,
+    });
+  }
 });
 
 // listening server
