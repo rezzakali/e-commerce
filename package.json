@@ -1,0 +1,15 @@
+{
+  "name": "e-shop",
+  "version": "1.0.0",
+  "description": "e commerce application by rezzak",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Rezzak Ali",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
