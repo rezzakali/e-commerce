@@ -75,7 +75,7 @@ function Footer() {
   ];
 
   return (
-    <footer className="container-fluid bg-dark text-white py-5">
+    <footer className="container-fluid bg-dark text-white pt-4 pb-1">
       <Container fluid>
         <Row>
           <Col sm={12} md={6} lg={3}>
@@ -124,6 +124,25 @@ function Footer() {
           </Col>
         </Row>
       </Container>
+      <hr />
+      <Row>
+        <Col sm={12} md={6} lg={6} className="text-start">
+          <p>&copy; {new Date().getFullYear()} Inc. All rights reserved.</p>
+        </Col>
+        <Col className="text-end" sm={12} md={6} lg={6}>
+          <p>
+            Developed By {''}
+            <NavLink
+              to="https://developer-rezzak.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-decoration-none"
+            >
+              Rezzak
+            </NavLink>
+          </p>
+        </Col>
+      </Row>
     </footer>
   );
 }

@@ -3,6 +3,7 @@ import { Container, Nav, NavDropdown, Navbar } from 'react-bootstrap';
 import { BsCartPlus } from 'react-icons/bs';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useLocation } from 'react-router-dom';
+import styles from '../styles/Nav.module.css';
 import SearchForm from './SearchForm';
 
 function Navigation() {
@@ -20,7 +21,10 @@ function Navigation() {
         <LinkContainer to="/">
           <Nav.Link className="fs-2">e-shop</Nav.Link>
         </LinkContainer>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Toggle
+          aria-controls="responsive-navbar-nav"
+          className={`${styles.navbar_toggler}`}
+        />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mx-auto">
             <LinkContainer to="/">

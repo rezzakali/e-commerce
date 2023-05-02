@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
+import styles from '../styles/SearchForm.module.css';
 
 function SearchForm() {
   return (
@@ -7,12 +8,10 @@ function SearchForm() {
       <Form.Control
         type="search"
         placeholder="Search"
-        className="me-1"
+        className={`me-1 ${styles.search_form}`}
         aria-label="Search"
       />
-      <Button className="bg-light text-dark border border-secondary">
-        Search
-      </Button>
+      <Button className={`bg-light text-dark ${styles.button}`}>Search</Button>
     </Form>
   );
 }

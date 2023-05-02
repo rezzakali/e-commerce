@@ -1,0 +1,12 @@
+.search_form:hover {
+  border: 1px solid rgba(128, 128, 128, 0.555);
+}
+.search_form:focus,
+.search_form:active {
+  outline: none;
+  box-shadow: none;
+  border: 1px solid rgba(128, 128, 128, 0.555);
+}
+.button {
+  border: 1px solid rgba(128, 128, 128, 0.555) !important;
+}
