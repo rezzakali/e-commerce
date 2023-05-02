@@ -1,0 +1,10 @@
+.text_input:focus,
+.text_input:active {
+  outline: none;
+  box-shadow: none;
+  border: 1px solid rgba(128, 128, 128, 0.555);
+}
+
+.text_input:hover {
+  border: 1px solid rgba(128, 128, 128, 0.555);
+}
