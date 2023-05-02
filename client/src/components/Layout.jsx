@@ -1,12 +1,14 @@
 import React from 'react';
 import Footer from './Footer';
-import Nav from './Nav';
+import Navigation from './Navigation';
 
 function Layout({ children }) {
   return (
     <React.Fragment>
-      <Nav />
-      <main style={{ minHeight: '80vh' }}>{children}</main>
+      <Navigation />
+      <main style={{ minHeight: '80vh' }} className="container-fluid">
+        {children}
+      </main>
       <Footer />
     </React.Fragment>
   );

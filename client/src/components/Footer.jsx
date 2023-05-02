@@ -2,9 +2,9 @@ import React from 'react';
 
 function Footer() {
   return (
-    <div className="bg-dark text-white p-5">
+    <footer className="container-fluid bg-dark text-white py-5">
       <h3>Footer</h3>
-    </div>
+    </footer>
   );
 }
 

@@ -1,9 +1,12 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import About from './pages/About';
+import Cart from './pages/Cart';
 import Contact from './pages/Contact';
 import Home from './pages/Home';
+import Men from './pages/Men';
 import NotFound from './pages/NotFound';
+import Women from './pages/Women';
 
 function App() {
   return (
@@ -12,6 +15,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/cart" element={<Men />} />
+        <Route path="/men" element={<Men />} />
+        <Route path="/women" element={<Women />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </React.Fragment>
