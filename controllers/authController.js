@@ -4,7 +4,7 @@ import userModel from '../models/userModel.js';
 import ErrorResponse from '../utils/error.js';
 
 // register controller
-export const registerController = async (req, res, next) => {
+export const registerController = async (req, res) => {
   try {
     const { name, email, phone, password, address } = req.body;
     if (!name) {
@@ -52,15 +52,14 @@ export const registerController = async (req, res, next) => {
       message: 'User registered successfully!',
       user: newUser,
     });
-    next();
   } catch (err) {
     console.log(err);
-    return next(new ErrorResponse(err?.message, 400));
+    return new ErrorResponse(err?.message, 400);
   }
 };
 
 // login controller
-export const loginController = async (req, res, next) => {
+export const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -116,9 +115,7 @@ export const loginController = async (req, res, next) => {
       },
       token,
     });
-
-    next();
   } catch (err) {
-    return next(new ErrorResponse(err?.message, 500));
+    return new ErrorResponse(err?.message, 500);
   }
 };
