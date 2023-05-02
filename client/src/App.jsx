@@ -1,11 +1,20 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Route, Routes } from 'react-router-dom';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
-    <div>
-      <Button className="m-2">App Component</Button>
-    </div>
+    <React.Fragment>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </React.Fragment>
   );
 }
 
