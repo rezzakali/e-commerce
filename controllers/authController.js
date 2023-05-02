@@ -119,3 +119,8 @@ export const loginController = async (req, res) => {
     return new ErrorResponse(err?.message, 500);
   }
 };
+
+// testing
+export const testController = (req, res) => {
+  res.send('Prottected rotue');
+};
