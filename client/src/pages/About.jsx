@@ -5,7 +5,12 @@ import Layout from '../components/Layout';
 
 function About() {
   return (
-    <Layout>
+    <Layout
+      title={'About Us e-shop'}
+      author={'Rezzak'}
+      description={'this is about us page'}
+      keywords={'about us, about company, e-shop'}
+    >
       <h4 className="pt-4">About Company</h4>
       <Row>
         <Col sm={12} md={6} lg={6} className="py-5">

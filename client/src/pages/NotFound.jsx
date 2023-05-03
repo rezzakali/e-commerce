@@ -5,7 +5,12 @@ import Layout from '../components/Layout';
 
 function NotFound() {
   return (
-    <Layout>
+    <Layout
+      title={'page not found'}
+      keywords={'not found'}
+      author={'Rezzak'}
+      description={'page not found'}
+    >
       <div
         className="d-flex flex-column justify-content-center align-items-center "
         style={{

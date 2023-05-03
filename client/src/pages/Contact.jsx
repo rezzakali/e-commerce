@@ -10,7 +10,12 @@ import TextInput from '../components/TextInput';
 
 function Contact() {
   return (
-    <Layout>
+    <Layout
+      title={'Contact Us - e-shop'}
+      description={'Contact us page'}
+      author={'Rezzak'}
+      keywords={'contact us, learn more, how to chat with e-shop'}
+    >
       <h4 className="pt-4">Contact Us</h4>
       <Row className="text-center">
         <Col sm={12} md={4} lg={4} className="p-2 shadow-sm mx-auto">
