@@ -1,12 +1,13 @@
 import JWT from 'jsonwebtoken';
 import { comparePassword, hashPassword } from '../helpers/authHelper.js';
 import userModel from '../models/userModel.js';
-import ErrorResponse from '../utils/error.js';
 
 // register controller
 export const registerController = async (req, res) => {
   try {
-    const { name, email, phone, password, address } = req.body;
+    const { name, email, phone, password, address, confirmPassword } =
+      req.body.data;
+
     if (!name) {
       res.status(400).send({ message: 'Name is required!' });
     }
@@ -19,8 +20,9 @@ export const registerController = async (req, res) => {
     if (!password) {
       res.status(400).send({ message: 'Password is required!' });
     }
+
     if (!address) {
-      res.status(400).send({ message: 'Password is required!' });
+      res.status(400).send({ message: 'Address is required!' });
     }
 
     // check exist user
@@ -53,15 +55,16 @@ export const registerController = async (req, res) => {
       user: newUser,
     });
   } catch (err) {
-    console.log(err);
-    return new ErrorResponse(err?.message, 400);
+    res
+      .status(500)
+      .send({ message: 'There was a server side error!', success: false });
   }
 };
 
 // login controller
 export const loginController = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password } = req.body.data;
 
     // check email and password is provided or not
     if (!email) {
@@ -116,7 +119,9 @@ export const loginController = async (req, res) => {
       token,
     });
   } catch (err) {
-    return new ErrorResponse(err?.message, 500);
+    res
+      .status(500)
+      .send({ message: 'There was a server side error!', success: false });
   }
 };
 
