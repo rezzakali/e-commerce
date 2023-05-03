@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { Toaster } from 'react-hot-toast';
 import Footer from './Footer';
 import Navigation from './Navigation';
 
@@ -22,6 +23,7 @@ function Layout({ children, description, keywords, author, title }) {
       </Helmet>
       <Navigation />
       <main style={{ minHeight: '80vh' }} className="container-fluid">
+        <Toaster position="bottom-right" toastOptions={{ duration: 2000 }} />
         {children}
       </main>
       <Footer />

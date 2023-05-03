@@ -92,8 +92,12 @@ function Navigation() {
             <SearchForm />
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">Login</Nav.Link>
-            <Nav.Link href="#deets">Register</Nav.Link>
+            <LinkContainer to="/login">
+              <Nav.Link>Login</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/register">
+              <Nav.Link>Register</Nav.Link>
+            </LinkContainer>
             <LinkContainer to="/cart">
               <Nav.Link>
                 <BsCartPlus />
