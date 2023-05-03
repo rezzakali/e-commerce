@@ -1,22 +1,37 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
-import Toast from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import { AiFillLock } from 'react-icons/ai';
 import { GrMail } from 'react-icons/gr';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import loginImage from '../assets/signin.png';
 import Layout from '../components/Layout';
 import TextInput from '../components/TextInput';
+import { useLoginMutation } from '../features/auth/authApi';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const navigate = useNavigate();
+
+  const [login, { data, isSuccess, isError, error, isLoading }] =
+    useLoginMutation();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
-    Toast.success('Here is your taost');
+    login({ email, password });
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(data?.message);
+      navigate('/');
+    }
+    if (isError) {
+      toast.error(error?.data?.message);
+    }
+  }, [isSuccess, isError, data]);
 
   return (
     <Layout>
@@ -56,6 +71,7 @@ function Login() {
             <Button
               type="submit"
               className="w-100 bg-light text-dark border border-gray"
+              disabled={isLoading}
             >
               Login
             </Button>

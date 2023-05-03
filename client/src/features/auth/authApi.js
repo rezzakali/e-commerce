@@ -1,4 +1,5 @@
 import apiSlice from '../api/apiSlice';
+import { Login } from './authSlice';
 
 const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -18,10 +19,33 @@ const authApi = apiSlice.injectEndpoints({
       query: (data) => ({
         url: `/api/v1/auth/login`,
         method: 'POST',
-        body: data,
+        body: { data },
       }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const response = await queryFulfilled;
+          console.log(response.data);
+
+          localStorage.setItem(
+            'auth',
+            JSON.stringify({
+              accessToken: response?.data?.token,
+              user: response?.data?.user,
+            })
+          );
+
+          dispatch(
+            Login({
+              accessToken: response?.data?.token,
+              user: response?.data?.user,
+            })
+          );
+        } catch (err) {
+          console.log(err);
+        }
+      },
     }),
   }),
 });
 
-export const { useRegisterMutation } = authApi;
+export const { useRegisterMutation, useLoginMutation } = authApi;
