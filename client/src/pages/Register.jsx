@@ -68,14 +68,14 @@ function Register() {
   return (
     <Layout>
       <Row className="p-3">
-        <Col>
+        <Col sm={12} md={6} lg={6}>
           <img
             src={registerImage}
             alt="register image"
             className="h-100 w-100 object-fit-cover"
           />
         </Col>
-        <Col className="p-5">
+        <Col className="p-5" sm={12} md={6} lg={6}>
           <form onSubmit={handleSubmit}>
             <TextInput
               type="text"

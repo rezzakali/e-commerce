@@ -1,14 +1,32 @@
 import React from 'react';
-import { Container, Nav, NavDropdown, Navbar } from 'react-bootstrap';
+import {
+  Button,
+  Container,
+  Dropdown,
+  Nav,
+  NavDropdown,
+  Navbar,
+} from 'react-bootstrap';
 import { BsCartPlus } from 'react-icons/bs';
+import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Logout } from '../features/auth/authSlice';
 import styles from '../styles/Nav.module.css';
 import SearchForm from './SearchForm';
 
 function Navigation() {
   const location = useLocation();
   const { pathname } = location;
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(Logout());
+    localStorage.removeItem('auth');
+    navigate('/');
+  };
 
   return (
     <Navbar
@@ -92,18 +110,49 @@ function Navigation() {
             <SearchForm />
           </Nav>
           <Nav>
-            <LinkContainer to="/login">
-              <Nav.Link>Login</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/register">
-              <Nav.Link>Register</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/cart">
-              <Nav.Link>
-                <BsCartPlus />
-                <span>(10)</span>
-              </Nav.Link>
-            </LinkContainer>
+            {user ? (
+              <>
+                <Dropdown>
+                  <Dropdown.Toggle className="bg-light text-dark border-0">
+                    {user?.name}
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    <LinkContainer to="/profile">
+                      <Nav.Link>Profile</Nav.Link>
+                    </LinkContainer>
+
+                    <Button
+                      className="bg-body border-0 text-dark text-start"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </Button>
+                  </Dropdown.Menu>
+                </Dropdown>
+                <LinkContainer to="/cart">
+                  <Nav.Link to="/cart">
+                    <BsCartPlus />
+                    <span>(10)</span>
+                  </Nav.Link>
+                </LinkContainer>
+              </>
+            ) : (
+              <>
+                <LinkContainer to="/login">
+                  <Nav.Link>Login</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/register">
+                  <Nav.Link>Register</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/cart">
+                  <Nav.Link>
+                    <BsCartPlus />
+                    <span>(0)</span>
+                  </Nav.Link>
+                </LinkContainer>
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

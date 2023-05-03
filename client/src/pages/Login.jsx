@@ -36,14 +36,14 @@ function Login() {
   return (
     <Layout>
       <Row className="p-3">
-        <Col>
+        <Col sm={12} md={6} lg={6}>
           <img
             src={loginImage}
             alt="login image"
             className="object-fit-cover h-100 w-100"
           />
         </Col>
-        <Col>
+        <Col sm={12} md={6} lg={6}>
           <h1 className="my-5">Login</h1>
           <form onSubmit={handleSubmit}>
             <TextInput
