@@ -9,7 +9,7 @@ function Home() {
       keywords={'home page,clothes, shoes, clocks, kurta pyjama, lehenga choli'}
       author={'Rezzak'}
     >
-      Home
+      <h1>home page</h1>
     </Layout>
   );
 }

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
-import Toast from 'react-hot-toast';
 import { AiFillLock } from 'react-icons/ai';
 import { BsTelephoneInboundFill } from 'react-icons/bs';
 import { FaUserAlt } from 'react-icons/fa';
@@ -10,6 +9,7 @@ import { NavLink } from 'react-router-dom';
 import registerImage from '../assets/signup.png';
 import Layout from '../components/Layout';
 import TextInput from '../components/TextInput';
+import { useRegisterMutation } from '../features/auth/authApi';
 
 function Register() {
   const [name, setName] = useState('');
@@ -19,10 +19,11 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [address, setAddress] = useState('');
 
+  const [register, { isLoading, isSuccess: isError, error }] =
+    useRegisterMutation();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(name, email, phone, password, address);
-    Toast.success('Here is your taost');
   };
 
   return (
