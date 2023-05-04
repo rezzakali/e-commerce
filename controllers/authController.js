@@ -5,8 +5,7 @@ import userModel from '../models/userModel.js';
 // register controller
 export const registerController = async (req, res) => {
   try {
-    const { name, email, phone, password, address, confirmPassword } =
-      req.body.data;
+    const { name, email, phone, password, address } = req.body.data;
 
     if (!name) {
       res.status(400).send({ message: 'Name is required!' });
@@ -55,6 +54,7 @@ export const registerController = async (req, res) => {
       user: newUser,
     });
   } catch (err) {
+    console.log(err);
     res
       .status(500)
       .send({ message: 'There was a server side error!', success: false });
