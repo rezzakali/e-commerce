@@ -16,6 +16,12 @@ import Women from './pages/Women';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import UserDashboard from './pages/user/UserDashboard';
 
+import Categories from './pages/admin/Categories';
+import Customers from './pages/admin/Customers';
+import Orders from './pages/admin/Orders';
+import Products from './pages/admin/Products';
+import Settings from './pages/admin/Settings';
+
 function App() {
   const authCheck = useAuthCheck();
 
@@ -42,6 +48,11 @@ function App() {
         {/* admin */}
         <Route path="/dashboard" element={<AdminRouteProtect />}>
           <Route path="admin" element={<AdminDashboard />} />
+          <Route path="admin/categories" element={<Categories />} />
+          <Route path="admin/customers" element={<Customers />} />
+          <Route path="admin/orders" element={<Orders />} />
+          <Route path="admin/products" element={<Products />} />
+          <Route path="admin/settings" element={<Settings />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

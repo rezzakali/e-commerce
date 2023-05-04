@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Toaster } from 'react-hot-toast';
+import { useSelector } from 'react-redux';
 import Footer from './Footer';
 import Navigation from './Navigation';
 
@@ -12,6 +13,7 @@ Layout.defaultProps = {
 };
 
 function Layout({ children, description, keywords, author, title }) {
+  const { user } = useSelector((state) => state.auth);
   return (
     <React.Fragment>
       <Helmet>
@@ -26,7 +28,7 @@ function Layout({ children, description, keywords, author, title }) {
         <Toaster position="bottom-right" toastOptions={{ duration: 2000 }} />
         {children}
       </main>
-      <Footer />
+      {user?.role === 'user' && <Footer />}
     </React.Fragment>
   );
 }

@@ -153,7 +153,15 @@ function Register() {
               className="w-100 bg-light text-dark border border-gray"
               disabled={isLoading}
             >
-              Register
+              {isLoading ? (
+                <span
+                  className="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+              ) : (
+                'Register'
+              )}
             </Button>
           </form>
           <br />

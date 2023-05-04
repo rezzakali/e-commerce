@@ -84,7 +84,15 @@ function Login() {
               className="w-100 bg-light text-dark border border-gray"
               disabled={isLoading}
             >
-              Login
+              {isLoading ? (
+                <span
+                  className="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+              ) : (
+                'Login'
+              )}
             </Button>
           </form>
           <div className="my-3 d-flex flex-row mx-auto justify-content-between ">

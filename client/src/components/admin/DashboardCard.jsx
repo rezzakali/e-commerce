@@ -1,0 +1,27 @@
+import React from 'react';
+import { Card, Col } from 'react-bootstrap';
+
+function DashboardCard({ title, amount, image, icon }) {
+  return (
+    <Col>
+      <Card className="shadow">
+        <Card.Body>
+          <div className="d-flex flex-row justify-content-around">
+            <div
+              className="d-flex justify-content-center align-items-center border rounded-circle"
+              style={{ width: '70px', height: '70px' }}
+            >
+              {icon}
+            </div>
+            <div>
+              <p className="fs-6">{title}</p>
+              <Card.Text className="fw-bold">{amount}</Card.Text>
+            </div>
+          </div>
+        </Card.Body>
+      </Card>
+    </Col>
+  );
+}
+
+export default DashboardCard;

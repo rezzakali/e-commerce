@@ -84,7 +84,15 @@ function ForgotPasswordModal({ show, handleClose, setShow }) {
             type="submit"
             disabled={isLoading}
           >
-            Reset
+            {isLoading ? (
+              <span
+                className="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              />
+            ) : (
+              'Reset'
+            )}
           </Button>
         </form>
       </Modal.Body>
