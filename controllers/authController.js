@@ -5,7 +5,7 @@ import userModel from '../models/userModel.js';
 // register controller
 export const registerController = async (req, res) => {
   try {
-    const { name, email, phone, password, address } = req.body.data;
+    const { name, email, phone, password, address, answer } = req.body.data;
 
     if (!name) {
       res.status(400).send({ message: 'Name is required!' });
@@ -22,6 +22,9 @@ export const registerController = async (req, res) => {
 
     if (!address) {
       res.status(400).send({ message: 'Address is required!' });
+    }
+    if (!answer) {
+      res.status(400).send({ message: 'Answer is required!' });
     }
 
     // check exist user
@@ -45,6 +48,7 @@ export const registerController = async (req, res) => {
       phone,
       password: hashedPassword,
       address,
+      answer,
     });
 
     await newUser.save();
@@ -54,7 +58,6 @@ export const registerController = async (req, res) => {
       user: newUser,
     });
   } catch (err) {
-    console.log(err);
     res
       .status(500)
       .send({ message: 'There was a server side error!', success: false });
@@ -122,6 +125,52 @@ export const loginController = async (req, res) => {
     res
       .status(500)
       .send({ message: 'There was a server side error!', success: false });
+  }
+};
+
+// forgot password
+export const forgotPasswordController = async (req, res) => {
+  try {
+    const { email, answer, newPassword } = req.body.data;
+    if (!email) {
+      return res.status(400).send({
+        success: false,
+        message: 'Email is required!',
+      });
+    }
+    if (!answer) {
+      return res.status(400).send({
+        success: false,
+        message: 'Answer is required!',
+      });
+    }
+    if (!newPassword) {
+      return res.status(400).send({
+        success: false,
+        message: 'New password is required!',
+      });
+    }
+    // check user
+    const user = await userModel.findOne({ email, answer });
+    if (!user) {
+      return res
+        .status(404)
+        .send({ success: false, message: `User doesn't exists!` });
+    }
+    // hash new password
+    const hashNewPassword = await hashPassword(newPassword);
+
+    await userModel.findByIdAndUpdate(user._id, { password: hashNewPassword });
+
+    res
+      .status(200)
+      .send({ success: true, message: 'Password reset successfully!' });
+  } catch (err) {
+    res.status(500).send({
+      success: false,
+      message: err?.message,
+      error: err,
+    });
   }
 };
 

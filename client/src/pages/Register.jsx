@@ -6,6 +6,7 @@ import { BsTelephoneInboundFill } from 'react-icons/bs';
 import { FaUserAlt } from 'react-icons/fa';
 import { GrMail } from 'react-icons/gr';
 import { HiLocationMarker } from 'react-icons/hi';
+import { RiQuestionAnswerLine } from 'react-icons/ri';
 import { NavLink, useNavigate } from 'react-router-dom';
 import registerImage from '../assets/signup.png';
 import Layout from '../components/Layout';
@@ -20,6 +21,7 @@ function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [address, setAddress] = useState('');
+  const [answer, setAnswer] = useState('');
 
   const navigate = useNavigate();
 
@@ -51,7 +53,7 @@ function Register() {
     if (password !== confirmPassword) {
       toast.error('Password mismatched!');
     } else {
-      register({ name, email, phone, address, password });
+      register({ name, email, phone, address, password, answer });
     }
   };
 
@@ -117,6 +119,16 @@ function Register() {
             />
             <br />
             <TextInput
+              type="text"
+              icon={<RiQuestionAnswerLine />}
+              required
+              placeholder={'What is your favourite sports?'}
+              size={'sm'}
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
+            <br />
+            <TextInput
               type="password"
               icon={<AiFillLock />}
               required
@@ -146,7 +158,10 @@ function Register() {
           </form>
           <br />
           <div>
-            Already have an account! <NavLink to="/login">Login</NavLink>
+            Already have an account!{' '}
+            <NavLink to="/login" className="text-decoration-none">
+              Login
+            </NavLink>
           </div>
         </Col>
       </Row>

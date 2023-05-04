@@ -5,6 +5,7 @@ import { AiFillLock } from 'react-icons/ai';
 import { GrMail } from 'react-icons/gr';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import loginImage from '../assets/signin.png';
+import ForgotPasswordModal from '../components/ForgotPasswordModal';
 import Layout from '../components/Layout';
 import TextInput from '../components/TextInput';
 import { useLoginMutation } from '../features/auth/authApi';
@@ -12,6 +13,12 @@ import { useLoginMutation } from '../features/auth/authApi';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  // for forgot password modal
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -77,8 +84,24 @@ function Login() {
               Login
             </Button>
           </form>
-          <div className="my-3">
-            I don't have any account! <NavLink to="/register">Register</NavLink>
+          <div className="my-3 d-flex flex-row mx-auto justify-content-between ">
+            <div>
+              I don't have any account!{' '}
+              <NavLink to="/register" className="text-decoration-none">
+                Register
+              </NavLink>
+            </div>
+            <ForgotPasswordModal
+              show={show}
+              handleClose={handleClose}
+              handleShow={handleShow}
+              setShow={setShow}
+            />
+            <div>
+              <NavLink onClick={handleShow} className="text-decoration-none">
+                Forgot password
+              </NavLink>
+            </div>
           </div>
         </Col>
       </Row>
