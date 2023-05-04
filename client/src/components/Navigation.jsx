@@ -25,7 +25,7 @@ function Navigation() {
   const handleLogout = () => {
     dispatch(Logout());
     localStorage.removeItem('auth');
-    navigate('/');
+    navigate('/login');
   };
 
   return (

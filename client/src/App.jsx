@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import UserPrivateRoute from './components/routes/UserPrivateRoute';
 import useAuthCheck from './hooks/useAuthCheck';
 import About from './pages/About';
 import Cart from './pages/Cart';
@@ -12,6 +13,7 @@ import Profile from './pages/Profile';
 import Register from './pages/Register';
 import Women from './pages/Women';
 import Dashboard from './pages/admin/Dashboard';
+import UserDashboard from './pages/user/UserDashboard';
 
 function App() {
   const authCheck = useAuthCheck();
@@ -25,9 +27,16 @@ function App() {
         <Route path="/men" element={<Men />} />
         <Route path="/women" element={<Women />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/profile" element={<Profile />} />
+
+        {/* login / register */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        {/* user dashboard */}
+        <Route path="/dashboard" element={<UserPrivateRoute />}>
+          <Route path="user" element={<UserDashboard />} />
+          <Route path="profile" element={<Profile />} />
+        </Route>
 
         {/* admin */}
         <Route path="/admin/dashboard" element={<Dashboard />} />

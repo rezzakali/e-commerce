@@ -3,7 +3,7 @@ import { Button, Col, Row } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
 import { AiFillLock } from 'react-icons/ai';
 import { GrMail } from 'react-icons/gr';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import loginImage from '../assets/signin.png';
 import Layout from '../components/Layout';
 import TextInput from '../components/TextInput';
@@ -14,6 +14,7 @@ function Login() {
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [login, { data, isSuccess, isError, error, isLoading }] =
     useLoginMutation();
@@ -26,7 +27,7 @@ function Login() {
   useEffect(() => {
     if (isSuccess) {
       toast.success(data?.message);
-      navigate('/');
+      navigate(location.state || '/');
     }
     if (isError) {
       toast.error(error?.data?.message);
