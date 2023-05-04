@@ -34,7 +34,10 @@ function Login() {
   useEffect(() => {
     if (isSuccess) {
       toast.success(data?.message);
-      navigate(location.state || '/');
+      navigate(
+        location.state ||
+          `/${data?.user?.role === 'admin' ? 'dashboard/admin' : ''}`
+      );
     }
     if (isError) {
       toast.error(error?.data?.message);

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import AdminRouteProtect from './admin/AdminDashboard';
 import UserPrivateRoute from './components/routes/UserPrivateRoute';
 import useAuthCheck from './hooks/useAuthCheck';
 import About from './pages/About';
@@ -12,7 +13,7 @@ import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
 import Women from './pages/Women';
-import Dashboard from './pages/admin/Dashboard';
+import AdminDashboard from './pages/admin/AdminDashboard';
 import UserDashboard from './pages/user/UserDashboard';
 
 function App() {
@@ -39,7 +40,9 @@ function App() {
         </Route>
 
         {/* admin */}
-        <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<AdminRouteProtect />}>
+          <Route path="admin" element={<AdminDashboard />} />
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </React.Fragment>

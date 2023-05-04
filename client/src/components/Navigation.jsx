@@ -118,8 +118,12 @@ function Navigation() {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <LinkContainer to="/profile">
-                      <Nav.Link>Profile</Nav.Link>
+                    <LinkContainer
+                      to={`/dashboard/${
+                        user?.role === 'admin' ? 'admin' : 'user'
+                      }`}
+                    >
+                      <Nav.Link>Dashboard</Nav.Link>
                     </LinkContainer>
 
                     <Button
