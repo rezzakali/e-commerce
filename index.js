@@ -9,6 +9,7 @@ import morgan from 'morgan';
 import connectDb from './config/db.js';
 import errorHandler from './middlewares/errorHandler.js';
 import authRoutes from './routes/authRoutes.js';
+import categoryRoutes from './routes/categoryRoutes.js';
 
 // config dotenv
 dotenv.config();
@@ -32,10 +33,7 @@ app.use(morgan('dev'));
 
 // route
 app.use('/api/v1/auth', authRoutes);
-
-app.get('/', (req, res) => {
-  res.send('Hello');
-});
+app.use('/api/v1/category', categoryRoutes);
 
 // error handler || mongodb related
 app.use(errorHandler);
