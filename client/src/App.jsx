@@ -10,7 +10,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Men from './pages/Men';
 import NotFound from './pages/NotFound';
-import Profile from './pages/Profile';
+import Orders from './pages/Orders';
 import Register from './pages/Register';
 import Women from './pages/Women';
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -18,7 +18,6 @@ import UserDashboard from './pages/user/UserDashboard';
 
 import Categories from './pages/admin/Categories';
 import Customers from './pages/admin/Customers';
-import Orders from './pages/admin/Orders';
 import Products from './pages/admin/Products';
 import Settings from './pages/admin/Settings';
 
@@ -42,7 +41,7 @@ function App() {
         {/* user dashboard */}
         <Route path="/dashboard" element={<UserPrivateRoute />}>
           <Route path="user" element={<UserDashboard />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="user/orders" element={<Orders />} />
         </Route>
 
         {/* admin */}
