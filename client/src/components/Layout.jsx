@@ -28,7 +28,7 @@ function Layout({ children, description, keywords, author, title }) {
         <Toaster position="bottom-right" toastOptions={{ duration: 2000 }} />
         {children}
       </main>
-      {user?.role === 'user' && <Footer />}
+      {user?.role === 'admin' ? '' : <Footer />}
     </React.Fragment>
   );
 }

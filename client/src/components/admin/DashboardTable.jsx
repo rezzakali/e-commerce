@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 
-function RecentOrdersTable() {
+function DashboardTable() {
   return (
     <div style={{ maxHeight: '300px', overflowY: 'scroll' }}>
       <Table className="table-hover">
@@ -48,11 +48,6 @@ function RecentOrdersTable() {
             <td>Mark</td>
             <td>Otto</td>
             <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
             <td>@mdo</td>
           </tr>
           <tr>
@@ -60,11 +55,6 @@ function RecentOrdersTable() {
             <td>Mark</td>
             <td>Otto</td>
             <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
             <td>@mdo</td>
           </tr>
           <tr>
@@ -72,11 +62,6 @@ function RecentOrdersTable() {
             <td>Mark</td>
             <td>Otto</td>
             <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
             <td>@mdo</td>
           </tr>
           <tr>
@@ -84,17 +69,6 @@ function RecentOrdersTable() {
             <td>Mark</td>
             <td>Otto</td>
             <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
             <td>@mdo</td>
           </tr>
         </tbody>
@@ -103,4 +77,4 @@ function RecentOrdersTable() {
   );
 }
 
-export default RecentOrdersTable;
+export default DashboardTable;

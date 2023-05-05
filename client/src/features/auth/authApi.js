@@ -21,6 +21,7 @@ const authApi = apiSlice.injectEndpoints({
         method: 'POST',
         body: { data },
       }),
+
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const response = await queryFulfilled;
@@ -55,6 +56,39 @@ const authApi = apiSlice.injectEndpoints({
         },
       }),
     }),
+
+    // fetched all users
+    getAllUsers: builder.query({
+      query: () => ({
+        url: `/api/v1/auth/all-users`,
+        method: 'GET',
+      }),
+    }),
+
+    // fetched all users
+    deleteUser: builder.mutation({
+      query: (id) => ({
+        url: `/api/v1/auth/delete-user/${id}`,
+        method: 'DELETE',
+      }),
+
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        const result = dispatch(
+          apiSlice.util.updateQueryData('getAllUsers', undefined, (draft) => {
+            const user = draft?.users?.find((u) => u._id === arg);
+            const userIndex = draft?.users?.indexOf(user);
+            if (userIndex !== -1) {
+              draft?.users?.splice(userIndex, 1);
+            }
+          })
+        );
+        try {
+          await queryFulfilled;
+        } catch (error) {
+          result.undo();
+        }
+      },
+    }),
   }),
 });
 
@@ -62,4 +96,7 @@ export const {
   useRegisterMutation,
   useLoginMutation,
   useForgotPasswordMutation,
+  useUpdateAdminMutation,
+  useGetAllUsersQuery,
+  useDeleteUserMutation,
 } = authApi;

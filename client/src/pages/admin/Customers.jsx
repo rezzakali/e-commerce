@@ -3,6 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import Layout from '../../components/Layout';
 import AdminLogout from '../../components/admin/AdminLogout';
 import AdminSidebar from '../../components/admin/AdminSidebar';
+import AllCustomersTable from '../../components/admin/AllCustomersTable';
 
 function Customers() {
   return (
@@ -13,7 +14,9 @@ function Customers() {
           <AdminLogout />
         </Col>
         <Col sm={12} md={10} lg={10}>
-          <h1>Customers</h1>
+          <h4>All Customers</h4>
+          <hr />
+          <AllCustomersTable />
         </Col>
       </Row>
     </Layout>

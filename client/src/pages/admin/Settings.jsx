@@ -1,6 +1,7 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import Layout from '../../components/Layout';
+import AdminInfo from '../../components/admin/AdminInfo';
 import AdminLogout from '../../components/admin/AdminLogout';
 import AdminSidebar from '../../components/admin/AdminSidebar';
 
@@ -13,7 +14,10 @@ function Settings() {
           <AdminLogout />
         </Col>
         <Col sm={12} md={10} lg={10}>
-          <h1>Settings</h1>
+          <div className="m-5">
+            <h4>Settings</h4>
+            <AdminInfo />
+          </div>
         </Col>
       </Row>
     </Layout>

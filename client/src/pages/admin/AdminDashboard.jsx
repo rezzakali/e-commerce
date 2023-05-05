@@ -10,7 +10,7 @@ import AdminGreeting from '../../components/admin/AdminGreeting';
 import AdminLogout from '../../components/admin/AdminLogout';
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import DashboardCard from '../../components/admin/DashboardCard';
-import RecentOrdersTable from '../../components/admin/RecentOrdersTable';
+import DashboardTable from '../../components/admin/DashboardTable';
 
 function AdminDashboard() {
   return (
@@ -58,8 +58,7 @@ function AdminDashboard() {
           <Row>
             <h4 className="my-4">Recent Orders</h4>
             <hr />
-
-            <RecentOrdersTable />
+            <DashboardTable />
           </Row>
         </Col>
       </Row>

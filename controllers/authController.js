@@ -174,6 +174,42 @@ export const forgotPasswordController = async (req, res) => {
   }
 };
 
+// get all users
+export const getAllUsersController = async (req, res) => {
+  try {
+    const users = await userModel.find({ role: 'user' });
+    res.status(200).send({
+      success: true,
+      message: 'User fetched successfully!',
+      users,
+    });
+  } catch (err) {
+    res.status(500).send({
+      success: false,
+      message: err?.message,
+      error: err,
+    });
+  }
+};
+
+// delete user
+export const deleteUserController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await userModel.findByIdAndDelete({ _id: id });
+    res.status(200).send({
+      success: true,
+      message: 'User deleted successfully!',
+    });
+  } catch (err) {
+    res.status(500).send({
+      success: false,
+      message: err?.message,
+      error: err,
+    });
+  }
+};
+
 // testing
 export const testController = (req, res) => {
   res.send('Prottected rotue');
