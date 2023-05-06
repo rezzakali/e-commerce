@@ -5,7 +5,7 @@ import styles from '../styles/TextInput.module.css';
 function TextInput({ icon, placeholder, className, as, ...rest }) {
   return (
     <InputGroup>
-      {as !== 'textarea' && <InputGroup.Text>{icon}</InputGroup.Text>}
+      {as !== 'textarea' && icon && <InputGroup.Text>{icon}</InputGroup.Text>}
       <Form.Control
         placeholder={placeholder}
         {...rest}

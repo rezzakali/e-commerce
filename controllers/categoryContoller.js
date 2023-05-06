@@ -4,7 +4,7 @@ import categoryModel from '../models/categoryModel.js';
 // create category || POST METHOD
 export const createCategoryController = async (req, res) => {
   try {
-    const { name } = req.body;
+    const { name } = req.body.data;
     if (!name) {
       res.status(400).send({ message: 'Category name must be require!' });
     }
@@ -22,8 +22,10 @@ export const createCategoryController = async (req, res) => {
     res.status(201).send({
       success: true,
       message: 'Category created successfully!',
+      newCategory,
     });
   } catch (err) {
+    console.log(err);
     res.status(500).send({
       success: false,
       message: err?.message || 'There was a server side error!',
@@ -71,7 +73,8 @@ export const categoryController = async (req, res) => {
 // update category || PUR METHOD
 export const updateCategoryController = async (req, res) => {
   try {
-    const { name } = req.body;
+    const { data: name } = req.body;
+
     const { id } = req.params;
     const updatedCategory = await categoryModel.findByIdAndUpdate(
       id,
@@ -81,12 +84,13 @@ export const updateCategoryController = async (req, res) => {
     res.status(200).send({
       success: true,
       message: 'Category updated successfully!',
-      catergory: updatedCategory,
+      category: updatedCategory,
     });
   } catch (err) {
+    console.log(err?.message);
     res.status(500).send({
       success: false,
-      message: err?.message || 'There was a server side error!',
+      message: 'There was a server side error!',
       error: err,
     });
   }
@@ -96,10 +100,11 @@ export const updateCategoryController = async (req, res) => {
 export const deleteCategoryController = async (req, res) => {
   try {
     const { id } = req.params;
-    await categoryModel.findByIdAndDelete({ _id: id });
+    const deletedCategory = await categoryModel.findByIdAndDelete({ _id: id });
     res.status(200).send({
       success: true,
       message: 'Category deleted successfully!',
+      category: deletedCategory,
     });
   } catch (err) {
     res.status(500).send({

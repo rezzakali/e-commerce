@@ -11,7 +11,7 @@ import {
 const router = express.Router();
 
 // create category
-router.post('/create-catergory', createCategoryController);
+router.post('/create-category', createCategoryController);
 
 // get categories
 router.get('/categories', categoriesController);
