@@ -14,6 +14,7 @@ import Orders from './pages/Orders';
 import Register from './pages/Register';
 import Women from './pages/Women';
 import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminOrders from './pages/admin/AdminOrders';
 import UserDashboard from './pages/user/UserDashboard';
 
 import Categories from './pages/admin/Categories';
@@ -49,7 +50,7 @@ function App() {
           <Route path="admin" element={<AdminDashboard />} />
           <Route path="admin/categories" element={<Categories />} />
           <Route path="admin/customers" element={<Customers />} />
-          <Route path="admin/orders" element={<Orders />} />
+          <Route path="admin/orders" element={<AdminOrders />} />
           <Route path="admin/products" element={<Products />} />
           <Route path="admin/settings" element={<Settings />} />
         </Route>

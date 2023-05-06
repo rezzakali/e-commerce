@@ -4,7 +4,7 @@ import Layout from '../../components/Layout';
 import AdminLogout from '../../components/admin/AdminLogout';
 import AdminSidebar from '../../components/admin/AdminSidebar';
 
-function Orders() {
+function AdminOrders() {
   return (
     <Layout>
       <Row style={{ height: '100vh' }}>
@@ -20,4 +20,4 @@ function Orders() {
   );
 }
 
-export default Orders;
+export default AdminOrders;

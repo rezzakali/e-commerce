@@ -59,7 +59,11 @@ function CategoriesTable() {
   if (isLoading) content = <Loading />;
   if (!isLoading && isError) content = <p>{error?.message}</p>;
   if (!isLoading && !isError && categories?.categories?.length === 0)
-    content = <p>No categories found!</p>;
+    content = (
+      <tr>
+        <td>No categories found!</td>
+      </tr>
+    );
   if (!isLoading && !isError && categories?.categories?.length > 0)
     content = categories.categories.map((item) => {
       const { name, slug, _id } = item;

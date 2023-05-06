@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Logout } from '../features/auth/authSlice';
+import { useGetCategoriesQuery } from '../features/category/categoryApi';
 import styles from '../styles/Nav.module.css';
 import SearchForm from './SearchForm';
 
@@ -21,6 +22,13 @@ function Navigation() {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const {
+    data: categories,
+    isLoading,
+    isError,
+    error,
+  } = useGetCategoriesQuery();
 
   const handleLogout = () => {
     dispatch(Logout());
@@ -95,17 +103,11 @@ function Navigation() {
             </LinkContainer>
 
             <NavDropdown title="Categories" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">T-Shirt</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Shirt</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Lehenga Choli
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">
-                Kurta Pyjama
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Shoes</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.4">Clock</NavDropdown.Item>
+              {categories?.categories?.map((c) => (
+                <NavDropdown.Item href="#action/3.1" key={c._id}>
+                  {c.name}
+                </NavDropdown.Item>
+              ))}
             </NavDropdown>
             <SearchForm />
           </Nav>

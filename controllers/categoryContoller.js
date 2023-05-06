@@ -87,7 +87,6 @@ export const updateCategoryController = async (req, res) => {
       category: updatedCategory,
     });
   } catch (err) {
-    console.log(err?.message);
     res.status(500).send({
       success: false,
       message: 'There was a server side error!',

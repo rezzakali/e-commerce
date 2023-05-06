@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Col } from 'react-bootstrap';
 
-function DashboardCard({ title, amount, image, icon }) {
+function DashboardCard({ title, amount, icon, isLoading }) {
   return (
     <Col>
       <Card className="shadow">
@@ -15,7 +15,9 @@ function DashboardCard({ title, amount, image, icon }) {
             </div>
             <div>
               <p className="fs-6">{title}</p>
-              <Card.Text className="fw-bold">{amount}</Card.Text>
+              <Card.Text className="fw-bold">
+                {isLoading ? 'fetching...' : amount}
+              </Card.Text>
             </div>
           </div>
         </Card.Body>

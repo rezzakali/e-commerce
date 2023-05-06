@@ -53,7 +53,7 @@ export const addProductController = async (req, res) => {
   } catch (err) {
     res.status(500).send({
       success: false,
-      message: err?.message || 'There was a server side error!',
+      message: 'There was a server side error!' || err?.message,
       error: err,
     });
   }
@@ -63,7 +63,7 @@ export const addProductController = async (req, res) => {
 export const updateProductController = async (req, res) => {
   try {
     const { name, description, price, category, quantity } = req.fields;
-
+    console.log(category);
     const { image } = req.files;
 
     // validation
@@ -99,7 +99,10 @@ export const updateProductController = async (req, res) => {
 
     const product = await productModel.findByIdAndUpdate(
       id,
-      { ...req.fields, slug: slugify(name) },
+      {
+        ...req.fields,
+        slug: slugify(name),
+      },
       { new: true }
     );
 
@@ -115,10 +118,10 @@ export const updateProductController = async (req, res) => {
       product,
     });
   } catch (err) {
-    console.log(err);
+    console.log(err?.message);
     res.status(500).send({
       success: false,
-      message: err?.message || 'There was a server side error!',
+      message: 'There was a server side error!' || err?.message,
       error: err,
     });
   }
@@ -131,7 +134,7 @@ export const getAllProductsController = async (req, res) => {
       .find({})
       .limit(20)
       .populate('category')
-      .select('-image')
+      // .select('-image')
       .sort({ createdAt: -1 });
 
     res.status(200).send({
@@ -193,6 +196,7 @@ export const getProductImageController = async (req, res) => {
 export const deleteProductController = async (req, res) => {
   try {
     const { pid } = req.params;
+
     await productModel.findByIdAndDelete(pid).select('-image');
     res.status(200).send({
       success: true,

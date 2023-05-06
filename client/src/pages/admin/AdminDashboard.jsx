@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
+import { toast } from 'react-hot-toast';
 import { BsFillCartCheckFill } from 'react-icons/bs';
 import { FaBox } from 'react-icons/fa';
 import { GiConfirmed, GiReceiveMoney } from 'react-icons/gi';
@@ -11,8 +12,19 @@ import AdminLogout from '../../components/admin/AdminLogout';
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import DashboardCard from '../../components/admin/DashboardCard';
 import DashboardTable from '../../components/admin/DashboardTable';
+import { useGetProductsQuery } from '../../features/product/productApi';
 
 function AdminDashboard() {
+  const { data: products, isLoading, isError, error } = useGetProductsQuery();
+
+  const totalProducts = products?.products?.length;
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(error?.data?.message);
+    }
+  }, [isError]);
+
   return (
     <Layout title="Admin - Dashboard">
       <Row className="mt-1" style={{ height: '100vh' }}>
@@ -26,8 +38,9 @@ function AdminDashboard() {
           <Row xs={1} md={3} className="g-3">
             <DashboardCard
               title="Total Products"
-              amount={98}
+              amount={totalProducts}
               icon={<FaBox size={35} />}
+              isLoading={isLoading}
             />
             <DashboardCard
               title="Total Orders"
