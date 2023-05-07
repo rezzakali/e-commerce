@@ -24,7 +24,8 @@ function ProductsTable() {
   const [quantity, setQuantity] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
-  const [id, setId] = useState();
+  const [id, setId] = useState('');
+  const [shipping, setShipping] = useState('');
 
   // for get products || RTK Query API Request || START
   const { data: products, isLoading, isError, error } = useGetProductsQuery();
@@ -47,7 +48,8 @@ function ProductsTable() {
   // edit product handler
   const handleProductEdit = (product) => {
     setShow(true);
-    const { name, price, quantity, category, description, _id } = product || {};
+    const { name, price, quantity, category, description, _id, shipping } =
+      product || {};
     const { name: categoryName } = category || {};
     setName(name);
     setId(_id);
@@ -55,6 +57,7 @@ function ProductsTable() {
     setQuantity(quantity);
     setCategory(categoryName);
     setDescription(description);
+    setShipping(shipping);
   };
 
   // delete product handler
@@ -88,16 +91,21 @@ function ProductsTable() {
 
   if (!isLoading && !isError && products?.products?.length > 0)
     content = products.products.map((product) => {
-      const { _id, category, name, price, quantity, createdAt } = product;
+      const { _id, category, name, price, quantity, createdAt, shipping } =
+        product;
       const { name: categoryName } = category;
 
       return (
         <tr key={_id}>
           <td>{_id}</td>
           <td>{name}</td>
+          <td>
+            <img src="" alt={name} />
+          </td>
           <td>{price}</td>
           <td>{quantity}</td>
           <td>{categoryName}</td>
+          <td>{shipping ? 'Yes' : 'No'}</td>
           <td>{moment(createdAt).format('MMMM Do YYYY')}</td>
           <td>
             <RiDeleteBin5Line
@@ -126,11 +134,13 @@ function ProductsTable() {
             <tr>
               <th>_id</th>
               <th>Name</th>
+              <th>Image</th>
               <th>Price</th>
               <th>Quantity</th>
               <th>Category</th>
-              <th>createdAt</th>
-              <th>operation</th>
+              <th>Shipping</th>
+              <th>CreatedAt</th>
+              <th>Operation</th>
             </tr>
           </thead>
         )}
@@ -144,7 +154,7 @@ function ProductsTable() {
         quantity={quantity}
         description={description}
         category={category}
-        mode={true}
+        shipping={shipping}
         id={id}
       />
     </>

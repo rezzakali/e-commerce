@@ -63,7 +63,7 @@ export const addProductController = async (req, res) => {
 export const updateProductController = async (req, res) => {
   try {
     const { name, description, price, category, quantity } = req.fields;
-    console.log(category);
+
     const { image } = req.files;
 
     // validation
@@ -118,7 +118,6 @@ export const updateProductController = async (req, res) => {
       product,
     });
   } catch (err) {
-    console.log(err?.message);
     res.status(500).send({
       success: false,
       message: 'There was a server side error!' || err?.message,

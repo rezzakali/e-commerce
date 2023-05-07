@@ -8,6 +8,7 @@ const productApi = apiSlice.injectEndpoints({
         url: `/api/v1/products/get-all-products`,
         method: 'GET',
       }),
+      providesTags: ['Products'],
     }),
 
     // add product
@@ -18,19 +19,20 @@ const productApi = apiSlice.injectEndpoints({
         body: data,
         formData: true,
       }),
+      invalidatesTags: ['Products'],
       // pessimistic cache update start
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        try {
-          const response = await queryFulfilled;
-          dispatch(
-            apiSlice.util.updateQueryData('getProducts', undefined, (draft) => {
-              draft?.products?.push(response?.data?.product);
-            })
-          );
-        } catch (error) {
-          console.log(error);
-        }
-      },
+      // async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      //   try {
+      //     const response = await queryFulfilled;
+      //     dispatch(
+      //       apiSlice.util.updateQueryData('getProducts', undefined, (draft) => {
+      //         draft?.products?.push(response?.data?.product);
+      //       })
+      //     );
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
+      // },
       // pessimistic cache update end
     }),
 
@@ -41,25 +43,25 @@ const productApi = apiSlice.injectEndpoints({
         method: 'PUT',
         body: data,
       }),
-
+      invalidatesTags: ['Products'],
       // pessimistic cache update start
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        try {
-          const response = await queryFulfilled;
-          dispatch(
-            apiSlice.util.updateQueryData('getProducts', undefined, (draft) => {
-              const product = draft?.products?.find((c) => c._id === arg.id);
+      // async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      //   try {
+      //     const response = await queryFulfilled;
+      //     dispatch(
+      //       apiSlice.util.updateQueryData('getProducts', undefined, (draft) => {
+      //         const product = draft?.products?.find((c) => c._id === arg.id);
 
-              if (product) {
-                const productIndex = draft?.products?.indexOf(product);
-                draft.products[productIndex] = response?.data?.product;
-              }
-            })
-          );
-        } catch (err) {
-          console.log(err);
-        }
-      },
+      //         if (product) {
+      //           const productIndex = draft?.products?.indexOf(product);
+      //           draft.products[productIndex] = response?.data?.product;
+      //         }
+      //       })
+      //     );
+      //   } catch (err) {
+      //     console.log(err);
+      //   }
+      // },
       // pessimistic cache update end
     }),
 
@@ -90,6 +92,14 @@ const productApi = apiSlice.injectEndpoints({
       },
       // optimistic cache udpate end from here
     }),
+
+    // get product image
+    getProductImage: builder.query({
+      query: ({ id }) => ({
+        url: `/api/v1/products/get-product-image/${id}`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
@@ -98,4 +108,5 @@ export const {
   useAddProductMutation,
   useDeleteProductMutation,
   useUpdateProductMutation,
+  useGetProductImageQuery,
 } = productApi;

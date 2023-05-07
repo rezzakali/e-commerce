@@ -17,7 +17,7 @@ function AddProductModal({
   quantity: editQuantity,
   description: editDescription,
   category: editCategory,
-  mode,
+  shipping: editShipping,
   id,
 }) {
   // fetch all categories
@@ -28,6 +28,7 @@ function AddProductModal({
   const [quantity, setQuantity] = useState('');
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
+  const [shipping, setShipping] = useState('');
   const [image, setImage] = useState('');
 
   useEffect(() => {
@@ -36,7 +37,16 @@ function AddProductModal({
     setDescription(editDescription);
     setQuantity(editQuantity);
     setPrice(editPrice);
-  }, [editName, editPrice, editCategory, editDescription, editQuantity, mode]);
+    setShipping(editShipping);
+  }, [
+    editName,
+    editPrice,
+    editCategory,
+    editDescription,
+    editQuantity,
+    editShipping,
+    id,
+  ]);
 
   const resetForm = () => {
     setName('');
@@ -45,6 +55,7 @@ function AddProductModal({
     setCategory('');
     setDescription('');
     setImage('');
+    setShipping('');
   };
 
   const [addProduct, { data: response, isLoading, isSuccess, isError, error }] =
@@ -82,6 +93,7 @@ function AddProductModal({
     formData.append('quantity', quantity);
     formData.append('category', category);
     formData.append('description', description);
+    formData.append('shipping', shipping);
     formData.append('image', image);
 
     addProduct(formData);
@@ -96,6 +108,7 @@ function AddProductModal({
     formData.append('quantity', quantity);
     formData.append('category', category);
     formData.append('description', description);
+    formData.append('shipping', shipping);
     formData.append('image', image);
 
     updateProduct({ data: formData, id });
@@ -122,10 +135,10 @@ function AddProductModal({
       centered
     >
       <Modal.Header closeButton>
-        <h5>{`${mode ? 'Update Product' : 'Add Product'}`}</h5>
+        <h5>{`${id ? 'Update Product' : 'Add Product'}`}</h5>
       </Modal.Header>
       <Modal.Body>
-        <form onSubmit={mode ? handleEdit : handleSubmit}>
+        <form onSubmit={id ? handleEdit : handleSubmit}>
           <TextInput
             type="text"
             placeholder="Product name"
@@ -158,8 +171,8 @@ function AddProductModal({
             className={`${styles.text_input}`}
             onChange={(e) => setCategory(e.target.value)}
           >
-            <option value={mode ? category : ''} hidden defaultValue>
-              {mode ? category : 'Select product category'}
+            <option value={id ? category : ''} hidden defaultValue>
+              {id ? category : 'Select product category'}
             </option>
             {categories?.categories?.map((c) => (
               <option key={c._id} value={c._id}>
@@ -197,6 +210,17 @@ function AddProductModal({
               />
             </div>
           )}
+          <Form.Select
+            className={`${styles.text_input}`}
+            size="sm"
+            onChange={(e) => setShipping(e.target.value)}
+          >
+            <option value="" hidden defaultValue>
+              {id ? (shipping ? 'Yes' : 'No') : 'Shipping'}
+            </option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </Form.Select>
           <br />
           <Button className="w-auto bg-success" size="sm" type="submit">
             {isLoading || editIsLoading ? (
@@ -206,7 +230,7 @@ function AddProductModal({
                 aria-hidden="true"
               />
             ) : (
-              `${mode ? 'Update Product' : 'Add Product'}`
+              `${id ? 'Update Product' : 'Add Product'}`
             )}
           </Button>
         </form>
