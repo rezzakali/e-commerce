@@ -91,16 +91,27 @@ function ProductsTable() {
 
   if (!isLoading && !isError && products?.products?.length > 0)
     content = products.products.map((product) => {
-      const { _id, category, name, price, quantity, createdAt, shipping } =
-        product;
+      const {
+        _id: id,
+        category,
+        name,
+        price,
+        quantity,
+        createdAt,
+        shipping,
+      } = product;
       const { name: categoryName } = category;
 
       return (
-        <tr key={_id}>
-          <td>{_id}</td>
+        <tr key={id}>
+          <td>{id}</td>
           <td>{name}</td>
           <td>
-            <img src="" alt={name} />
+            <img
+              src={`http://127.0.0.1:9000/api/v1/products/get-product-image/${id}`}
+              alt={name}
+              style={{ height: '40px', width: '40px' }}
+            />
           </td>
           <td>{price}</td>
           <td>{quantity}</td>

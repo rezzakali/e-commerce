@@ -94,12 +94,12 @@ const productApi = apiSlice.injectEndpoints({
     }),
 
     // get product image
-    getProductImage: builder.query({
-      query: ({ id }) => ({
-        url: `/api/v1/products/get-product-image/${id}`,
-        method: 'GET',
-      }),
-    }),
+    // getProductImage: builder.query({
+    //   query: ({ id }) => ({
+    //     url: `/api/v1/products/get-product-image/${id}`,
+    //     method: 'GET',
+    //   }),
+    // }),
   }),
 });
 
@@ -108,5 +108,5 @@ export const {
   useAddProductMutation,
   useDeleteProductMutation,
   useUpdateProductMutation,
-  useGetProductImageQuery,
+  // useGetProductImageQuery,
 } = productApi;

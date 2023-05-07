@@ -133,7 +133,7 @@ export const getAllProductsController = async (req, res) => {
       .find({})
       .limit(20)
       .populate('category')
-      // .select('-image')
+      .select('-image')
       .sort({ createdAt: -1 });
 
     res.status(200).send({

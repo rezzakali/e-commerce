@@ -201,6 +201,14 @@ function AddProductModal({
             onChange={(e) => setImage(e.target.files[0])}
           />
           <br />
+          {id && (
+            <img
+              src={`http://127.0.0.1:9000/api/v1/products/get-product-image/${id}`}
+              alt={name}
+              style={{ height: '60px', width: '60px' }}
+            />
+          )}
+
           {image && (
             <div className="text-center">
               <img
@@ -210,6 +218,7 @@ function AddProductModal({
               />
             </div>
           )}
+          <br />
           <Form.Select
             className={`${styles.text_input}`}
             size="sm"
