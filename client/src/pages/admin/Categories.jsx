@@ -3,7 +3,6 @@ import { Col, Row } from 'react-bootstrap';
 import { AiOutlineAppstoreAdd } from 'react-icons/ai';
 import Layout from '../../components/Layout';
 import AddCategoryModal from '../../components/admin/AddCategoryModal';
-import AdminLogout from '../../components/admin/AdminLogout';
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import CategoriesTable from '../../components/admin/CategoriesTable';
 
@@ -19,7 +18,6 @@ function Categories() {
       <Row style={{ height: '100vh' }}>
         <Col sm={12} md={2} lg={2} className="shadow">
           <AdminSidebar />
-          <AdminLogout />
         </Col>
         <Col sm={12} md={10} lg={10}>
           <div className="d-flex align-items-center justify-content-between">

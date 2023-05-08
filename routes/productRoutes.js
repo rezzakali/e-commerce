@@ -4,6 +4,7 @@ import {
   addProductController,
   deleteProductController,
   getAllProductsController,
+  getProductController,
   getProductImageController,
   getSingleProductController,
   updateProductController,
@@ -21,8 +22,11 @@ router.put('/update-product/:id', formidable(), updateProductController);
 // get all products || GET METHOD
 router.get('/get-all-products', formidable(), getAllProductsController);
 
-// get single product || GET METHOD
+// get single product slug || GET METHOD
 router.get('/get-product/:slug', formidable(), getSingleProductController);
+
+// get single product by id || GET METHOD
+router.get('/get-single-product/:id', formidable(), getProductController);
 
 // get image based on product id
 router.get('/get-product-image/:pid', formidable(), getProductImageController);

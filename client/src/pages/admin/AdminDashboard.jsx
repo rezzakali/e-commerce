@@ -8,7 +8,6 @@ import { ImCancelCircle } from 'react-icons/im';
 import { TbTruckDelivery } from 'react-icons/tb';
 import Layout from '../../components/Layout';
 import AdminGreeting from '../../components/admin/AdminGreeting';
-import AdminLogout from '../../components/admin/AdminLogout';
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import DashboardCard from '../../components/admin/DashboardCard';
 import DashboardTable from '../../components/admin/DashboardTable';
@@ -30,7 +29,6 @@ function AdminDashboard() {
       <Row className="mt-1" style={{ height: '100vh' }}>
         <Col sm={12} md={2} lg={2} className="shadow">
           <AdminSidebar />
-          <AdminLogout />
         </Col>
         <Col sm={12} md={10} lg={10}>
           <AdminGreeting />

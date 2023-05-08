@@ -37,12 +37,7 @@ function Navigation() {
   };
 
   return (
-    <Navbar
-      collapseOnSelect
-      expand="lg"
-      className="border-bottom shadow-sm z-1 bg-light"
-      sticky="top"
-    >
+    <Navbar collapseOnSelect expand="lg" className="z-1 bg-light" sticky="top">
       <Container fluid>
         <LinkContainer to="/">
           <Nav.Link className="fs-2">e-shop</Nav.Link>

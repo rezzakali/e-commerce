@@ -8,7 +8,7 @@ import {
   useDeleteProductMutation,
   useGetProductsQuery,
 } from '../../features/product/productApi';
-import Loading from '../Loading';
+import AdminLoading from '../admin/AdminLoading';
 import AddProductModal from './AddProductModal';
 
 function ProductsTable() {
@@ -78,7 +78,7 @@ function ProductsTable() {
   // for product get related || START
   let content = null;
 
-  if (isLoading) content = <Loading />;
+  if (isLoading) content = <AdminLoading />;
 
   if (!isLoading && isError) content = <p>{error?.message}</p>;
 
@@ -122,7 +122,7 @@ function ProductsTable() {
             <RiDeleteBin5Line
               role="button"
               className="text-danger mx-1"
-              onClick={() => handleDelete(_id)}
+              onClick={() => handleDelete(id)}
               disabled={deleteIsLoading}
             />
             <FaRegEdit

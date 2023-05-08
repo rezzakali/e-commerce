@@ -5,7 +5,11 @@ import { BiCategoryAlt } from 'react-icons/bi';
 import { BsBox, BsCartCheck } from 'react-icons/bs';
 import { FiUsers } from 'react-icons/fi';
 import { RxDashboard } from 'react-icons/rx';
-import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
+
+import { BiLogOutCircle } from 'react-icons/bi';
+import { Logout } from '../../features/auth/authSlice';
 
 function AdminSidebar() {
   const dashboardDatas = [
@@ -47,11 +51,25 @@ function AdminSidebar() {
     },
   ];
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(Logout());
+    localStorage.removeItem('auth');
+    navigate('/login');
+  };
+
   return (
     <>
       <ListGroup as="ol">
         {dashboardDatas.map(({ title, id, link, icon }) => (
-          <ListGroup.Item key={id} as="li" className="border-0 my-1">
+          <ListGroup.Item
+            key={id}
+            as="li"
+            className="border-0 my-1"
+            role="button"
+          >
             <div className="d-flex flex-row">
               <span className="mx-1">{icon}</span>
               <NavLink to={link} className="text-decoration-none text-dark">
@@ -60,6 +78,14 @@ function AdminSidebar() {
             </div>
           </ListGroup.Item>
         ))}
+
+        <ListGroup.Item
+          className="border-0 my-1"
+          role="button"
+          onClick={handleLogout}
+        >
+          <BiLogOutCircle /> Logout
+        </ListGroup.Item>
       </ListGroup>
     </>
   );

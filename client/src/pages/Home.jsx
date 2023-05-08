@@ -1,4 +1,7 @@
 import React from 'react';
+import { Col, Row } from 'react-bootstrap';
+import Filters from '../components/Filters';
+import HomePageProducts from '../components/HomePageProducts';
 import Layout from '../components/Layout';
 
 function Home() {
@@ -9,7 +12,14 @@ function Home() {
       keywords={'home page,clothes, shoes, clocks, kurta pyjama, lehenga choli'}
       author={'Rezzak'}
     >
-      <h1>home page</h1>
+      <Row className="mt-2">
+        <Col sm={12} md={2} lg={2} className="p-1">
+          <Filters />
+        </Col>
+        <Col sm={12} md={10} lg={10}>
+          <HomePageProducts />
+        </Col>
+      </Row>
     </Layout>
   );
 }

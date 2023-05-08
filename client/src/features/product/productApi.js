@@ -100,6 +100,14 @@ const productApi = apiSlice.injectEndpoints({
     //     method: 'GET',
     //   }),
     // }),
+
+    // get single product
+    getSingleProduct: builder.query({
+      query: (id) => ({
+        url: `/api/v1/products/get-single-product/${id}`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
@@ -109,4 +117,5 @@ export const {
   useDeleteProductMutation,
   useUpdateProductMutation,
   // useGetProductImageQuery,
+  useGetSingleProductQuery,
 } = productApi;

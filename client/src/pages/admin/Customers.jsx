@@ -1,7 +1,6 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import Layout from '../../components/Layout';
-import AdminLogout from '../../components/admin/AdminLogout';
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import AllCustomersTable from '../../components/admin/AllCustomersTable';
 
@@ -11,7 +10,6 @@ function Customers() {
       <Row style={{ height: '100vh' }}>
         <Col sm={12} md={2} lg={2} className="shadow">
           <AdminSidebar />
-          <AdminLogout />
         </Col>
         <Col sm={12} md={10} lg={10}>
           <h4>All Customers</h4>

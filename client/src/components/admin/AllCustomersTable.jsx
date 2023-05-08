@@ -7,7 +7,7 @@ import {
   useDeleteUserMutation,
   useGetAllUsersQuery,
 } from '../../features/auth/authApi';
-import Loading from '../Loading';
+import AdminLoading from '../admin/AdminLoading';
 
 function AllCustomersTable() {
   const { data: users, isLoading, isError, error } = useGetAllUsersQuery();
@@ -35,7 +35,7 @@ function AllCustomersTable() {
   }, [isSuccess, deleteUserIsError]);
 
   let content = null;
-  if (isLoading) content = <Loading />;
+  if (isLoading) content = <AdminLoading />;
 
   if (!isLoading && isError) content = toast.error(error?.message);
 

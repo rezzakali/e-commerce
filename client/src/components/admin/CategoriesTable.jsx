@@ -7,7 +7,7 @@ import {
   useDeleteCategoryMutation,
   useGetCategoriesQuery,
 } from '../../features/category/categoryApi';
-import Loading from '../Loading';
+import AdminLoading from '../admin/AdminLoading';
 import EditCategoryModal from './EditCategoryModal';
 
 function CategoriesTable() {
@@ -56,7 +56,7 @@ function CategoriesTable() {
   };
 
   let content = null;
-  if (isLoading) content = <Loading />;
+  if (isLoading) content = <AdminLoading />;
   if (!isLoading && isError) content = <p>{error?.message}</p>;
   if (!isLoading && !isError && categories?.categories?.length === 0)
     content = (

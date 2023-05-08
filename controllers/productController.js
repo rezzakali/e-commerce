@@ -131,7 +131,7 @@ export const getAllProductsController = async (req, res) => {
   try {
     const products = await productModel
       .find({})
-      .limit(20)
+      .limit(5)
       .populate('category')
       .select('-image')
       .sort({ createdAt: -1 });
@@ -168,6 +168,27 @@ export const getSingleProductController = async (req, res) => {
     res.status(500).send({
       success: false,
       message: err?.message || 'There was a server side error!',
+      error: err,
+    });
+  }
+};
+
+// get single product by id
+export const getProductController = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const product = await productModel.findById(id);
+
+    res.status(200).send({
+      success: true,
+      message: 'Fetched successfully!',
+      product,
+    });
+  } catch (err) {
+    res.status(500).send({
+      success: false,
+      message: 'There was a server side error' || err?.message,
       error: err,
     });
   }

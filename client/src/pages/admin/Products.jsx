@@ -3,7 +3,6 @@ import { Col, Row } from 'react-bootstrap';
 import { AiOutlineAppstoreAdd } from 'react-icons/ai';
 import Layout from '../../components/Layout';
 import AddProductModal from '../../components/admin/AddProductModal';
-import AdminLogout from '../../components/admin/AdminLogout';
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import ProductsTable from '../../components/admin/ProductsTable';
 
@@ -18,7 +17,6 @@ function Products() {
       <Row style={{ height: '100vh' }}>
         <Col sm={12} md={2} lg={2} className="shadow">
           <AdminSidebar />
-          <AdminLogout />
         </Col>
         <Col sm={12} md={10} lg={10}>
           <div className="d-flex align-items-center justify-content-between">
@@ -33,7 +31,9 @@ function Products() {
             </div>
           </div>
           <hr />
-          <ProductsTable />
+          <div style={{ height: '500px', overflowY: 'auto' }}>
+            <ProductsTable />
+          </div>
         </Col>
       </Row>
     </Layout>
