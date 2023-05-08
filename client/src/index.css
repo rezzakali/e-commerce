@@ -1,3 +1,25 @@
 body {
   background-color: #f6f7f8;
 }
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  background-color: #01b2b862;
+  color: #fff;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+}
+
+.scroll-to-top:hover {
+  background-color: #03b8bec0;
+}
+
+.show-scroll-button {
+  display: flex;
+}

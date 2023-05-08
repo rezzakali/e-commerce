@@ -108,6 +108,13 @@ const productApi = apiSlice.injectEndpoints({
         method: 'GET',
       }),
     }),
+
+    // get more product based on page
+    // getMoreProducts: builder.query({
+    //   query: (page) => ({
+    //     url: `/api/v1/products/get-more-products-based-on-page/${page}`,
+    //   }),
+    // }),
   }),
 });
 
@@ -116,6 +123,8 @@ export const {
   useAddProductMutation,
   useDeleteProductMutation,
   useUpdateProductMutation,
-  // useGetProductImageQuery,
   useGetSingleProductQuery,
+  // useGetMoreProductsQuery,
 } = productApi;
+
+export default productApi;

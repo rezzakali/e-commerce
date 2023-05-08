@@ -131,7 +131,7 @@ export const getAllProductsController = async (req, res) => {
   try {
     const products = await productModel
       .find({})
-      .limit(5)
+      // .limit(5)
       .populate('category')
       .select('-image')
       .sort({ createdAt: -1 });
@@ -230,3 +230,28 @@ export const deleteProductController = async (req, res) => {
     });
   }
 };
+
+// get more products || GET METHOD
+// export const getMoreProductsController = async (req, res) => {
+//   try {
+//     const perPage = 2;
+//     const page = req.params.page ? req.params.page : 1;
+//     const products = await productModel
+//       .find({})
+//       // .select("-image")
+//       .skip((page - 1) * perPage)
+//       .limit(perPage)
+//       .sort({ createdAt: -1 });
+
+//     res.status(200).send({
+//       success: true,
+//       products,
+//     });
+//   } catch (err) {
+//     res.status(500).send({
+//       success: false,
+//       message: 'There was a server side error!' || err?.message,
+//       error: err,
+//     });
+//   }
+// };

@@ -68,23 +68,24 @@ function HomePageProducts() {
     <>
       {isLoading && <Loading />}
       {isError && <p className="text-center">Something went wrong</p>}
-      <Row>
-        <p className="mt-3 fs-4">All Collections</p>
-        {filteredProducts?.map((product) => {
-          const { _id, name, description, price } = product || {};
-
-          return (
-            <ProductCard
-              key={_id}
-              id={_id}
-              name={name}
-              price={price}
-              description={description}
-              length={length}
-            />
-          );
-        })}
-      </Row>
+      <p className="mt-3 fs-4">All Collections</p>
+      {!isLoading && (
+        <Row>
+          {filteredProducts?.map((product) => {
+            const { _id, name, description, price } = product || {};
+            return (
+              <ProductCard
+                key={_id}
+                id={_id}
+                name={name}
+                price={price}
+                description={description}
+                length={length}
+              />
+            );
+          })}
+        </Row>
+      )}
     </>
   );
 }

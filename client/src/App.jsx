@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import AdminRouteProtect from './admin/AdminDashboard';
 import UserPrivateRoute from './components/routes/UserPrivateRoute';
 import useAuthCheck from './hooks/useAuthCheck';
 import About from './pages/About';
-import AdminDashboard from './pages/admin/AdminDashboard';
-import AdminOrders from './pages/admin/AdminOrders';
 import Cart from './pages/Cart';
 import Contact from './pages/Contact';
 import Home from './pages/Home';
@@ -14,17 +12,39 @@ import Men from './pages/Men';
 import NotFound from './pages/NotFound';
 import Orders from './pages/Orders';
 import Register from './pages/Register';
-import UserDashboard from './pages/user/UserDashboard';
 import Women from './pages/Women';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminOrders from './pages/admin/AdminOrders';
+import UserDashboard from './pages/user/UserDashboard';
 
+import ScrollToTopButton from './components/ScrollToTop';
+import SingleProduct from './pages/SingleProduct';
 import Categories from './pages/admin/Categories';
 import Customers from './pages/admin/Customers';
 import Products from './pages/admin/Products';
 import Settings from './pages/admin/Settings';
-import SingleProduct from './pages/SingleProduct';
 
 function App() {
   const authCheck = useAuthCheck();
+
+  const [showScrollButton, setShowScrollButton] = useState(false);
+
+  // scroll to top
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.pageYOffset > 200) {
+        setShowScrollButton(true);
+      } else {
+        setShowScrollButton(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <React.Fragment>
@@ -58,6 +78,7 @@ function App() {
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
+      {showScrollButton && <ScrollToTopButton />}
     </React.Fragment>
   );
 }
