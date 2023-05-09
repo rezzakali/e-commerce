@@ -93,14 +93,6 @@ const productApi = apiSlice.injectEndpoints({
       // optimistic cache udpate end from here
     }),
 
-    // get product image
-    // getProductImage: builder.query({
-    //   query: ({ id }) => ({
-    //     url: `/api/v1/products/get-product-image/${id}`,
-    //     method: 'GET',
-    //   }),
-    // }),
-
     // get single product
     getSingleProduct: builder.query({
       query: (id) => ({
@@ -109,12 +101,12 @@ const productApi = apiSlice.injectEndpoints({
       }),
     }),
 
-    // get more product based on page
-    // getMoreProducts: builder.query({
-    //   query: (page) => ({
-    //     url: `/api/v1/products/get-more-products-based-on-page/${page}`,
-    //   }),
-    // }),
+    // product listing per page || pagination
+    getPaginationProducts: builder.query({
+      query: (page) => ({
+        url: `/api/v1/products/get-product-list?page=${page}`,
+      }),
+    }),
   }),
 });
 
@@ -124,7 +116,7 @@ export const {
   useDeleteProductMutation,
   useUpdateProductMutation,
   useGetSingleProductQuery,
-  // useGetMoreProductsQuery,
+  useGetPaginationProductsQuery,
 } = productApi;
 
 export default productApi;

@@ -9,38 +9,6 @@ import SocialMedia from './SocialMedia';
 import CategoriesLists from './categoriesLists';
 
 function Footer() {
-  const categoriesItems = [
-    {
-      id: 1,
-      link: '/',
-      title: 'T-Shirt',
-    },
-    {
-      id: 2,
-      link: '/',
-      title: 'Shirt',
-    },
-    {
-      id: 3,
-      link: '/',
-      title: 'Lehenga Choli',
-    },
-    {
-      id: 4,
-      link: '/',
-      title: 'Kurta Pyjama',
-    },
-    {
-      id: 5,
-      link: '/',
-      title: 'Shoes',
-    },
-    {
-      id: 6,
-      link: '/',
-      title: 'Clock',
-    },
-  ];
   const informationItems = [
     {
       id: 1,
@@ -89,7 +57,7 @@ function Footer() {
           </Col>
           <Col sm={12} md={6} lg={3}>
             <h5 className="text-uppercase">categories</h5>
-            <CategoriesLists items={categoriesItems} />
+            <CategoriesLists />
           </Col>
           <Col sm={12} md={6} lg={3}>
             <h5 className="text-uppercase">information</h5>

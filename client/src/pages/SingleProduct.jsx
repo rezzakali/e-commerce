@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import Layout from '../components/Layout';
 import Loading from '../components/Loading';
 import { useGetSingleProductQuery } from '../features/product/productApi';
+import styles from '../styles/ProductCardButton.module.css';
 
 function SingleProduct() {
   const { id } = useParams();
@@ -35,9 +36,14 @@ function SingleProduct() {
             <h3>{name}</h3>
             <h2>₹ {price}.00</h2>
             <p>{description}</p>
-            <Button size="sm" className="bg-light text-dark border">
-              <BsCart4 role="button" /> Add to cart
-            </Button>
+            <div>
+              <Button
+                size="sm"
+                className={`w-auto rounded-0 ${styles.product_card_button}`}
+              >
+                <BsCart4 role="button" /> Add to cart
+              </Button>
+            </div>
           </Col>
         </Row>
       )}

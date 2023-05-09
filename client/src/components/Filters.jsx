@@ -25,7 +25,7 @@ function Filters() {
 
   return (
     <div className="p-3">
-      <p>Filter By Category</p>
+      <p style={{ color: 'rgba(230, 62, 62, 0.918)' }}>Filter By Category</p>
       <ul style={{ listStyle: 'none' }}>
         <li
           className="py-1"
@@ -53,7 +53,7 @@ function Filters() {
           </li>
         ))}
       </ul>
-      <p>Filter By Prices</p>
+      <p style={{ color: 'rgba(230, 62, 62, 0.918)' }}>Filter By Prices</p>
       <ul style={{ listStyle: 'none' }}>
         <li
           className="py-1"

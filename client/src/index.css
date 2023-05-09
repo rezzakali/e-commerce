@@ -1,5 +1,6 @@
 body {
   background-color: #f6f7f8;
+  overflow-x: hidden;
 }
 
 .scroll-to-top {
@@ -7,7 +8,7 @@ body {
   bottom: 20px;
   right: 20px;
   cursor: pointer;
-  background-color: #01b2b862;
+  background-color: rgba(230, 62, 62, 0.918);
   color: #fff;
   border: none;
   justify-content: center;
@@ -17,9 +18,16 @@ body {
 }
 
 .scroll-to-top:hover {
-  background-color: #03b8bec0;
+  background-color: rgba(231, 43, 43, 0.74);
 }
 
 .show-scroll-button {
   display: flex;
+}
+
+/* pagination button */
+#pagination_button:active,
+#pagination_button:focus {
+  outline: none;
+  box-shadow: none;
 }

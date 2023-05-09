@@ -7,6 +7,7 @@ import {
   getProductController,
   getProductImageController,
   getSingleProductController,
+  productListController,
   updateProductController,
 } from '../controllers/productController.js';
 
@@ -33,5 +34,8 @@ router.get('/get-product-image/:pid', formidable(), getProductImageController);
 
 // delete product
 router.delete('/delete-product/:pid', formidable(), deleteProductController);
+
+// get product list
+router.get('/get-product-list', formidable(), productListController);
 
 export default router;

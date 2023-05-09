@@ -231,27 +231,34 @@ export const deleteProductController = async (req, res) => {
   }
 };
 
-// get more products || GET METHOD
-// export const getMoreProductsController = async (req, res) => {
-//   try {
-//     const perPage = 2;
-//     const page = req.params.page ? req.params.page : 1;
-//     const products = await productModel
-//       .find({})
-//       // .select("-image")
-//       .skip((page - 1) * perPage)
-//       .limit(perPage)
-//       .sort({ createdAt: -1 });
+// product list controller
+export const productListController = async (req, res) => {
+  try {
+    const total = await productModel.find({}).estimatedDocumentCount();
 
-//     res.status(200).send({
-//       success: true,
-//       products,
-//     });
-//   } catch (err) {
-//     res.status(500).send({
-//       success: false,
-//       message: 'There was a server side error!' || err?.message,
-//       error: err,
-//     });
-//   }
-// };
+    const page = Number(req.query.page) || 1;
+    const perPage = 12;
+    const pageCount = total / perPage;
+
+    const products = await productModel
+      .find({})
+      .skip((page - 1) * perPage)
+      .limit(perPage)
+      .select('-image')
+      .sort({ createdAt: -1 });
+
+    res.status(200).send({
+      success: true,
+      products,
+      count: total,
+      pageCount,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      success: false,
+      message: 'There was a server side error!' || err?.message,
+      error: err,
+    });
+  }
+};

@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { Row } from 'react-bootstrap';
-import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import Loading from '../components/Loading';
 import { useGetProductsQuery } from '../features/product/productApi';
+import PaginationComponent from './PaginationComponent';
 import ProductCard from './ProductCard';
 
 function HomePageProducts() {
   const { data: products, isLoading, isError } = useGetProductsQuery();
 
+  const { paginateProductsLists } = useSelector((state) => state.products);
+
   const { filterWord, priceRange } = useSelector((state) => state.filter);
 
-  let filteredProducts = products?.products;
+  let filteredProducts = paginateProductsLists;
 
   // price range state
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(9999);
 
+  // price range
   useEffect(() => {
     if (priceRange === '99-199') {
       setMinPrice(99);
@@ -41,7 +44,7 @@ function HomePageProducts() {
 
   // filter by search keyword
   if (filterWord) {
-    filteredProducts = filteredProducts?.filter((product) => {
+    filteredProducts = paginateProductsLists?.filter((product) => {
       if (filterWord === '') {
         return true;
       } else {
@@ -51,18 +54,10 @@ function HomePageProducts() {
   }
 
   if (priceRange) {
-    filteredProducts = filteredProducts.filter(
+    filteredProducts = paginateProductsLists?.filter(
       (product) => product.price >= minPrice && product.price <= maxPrice
     );
   }
-
-  const length = filteredProducts?.length;
-
-  useEffect(() => {
-    if (length === 0) {
-      toast.error('No products');
-    }
-  }, [length]);
 
   return (
     <>
@@ -80,12 +75,12 @@ function HomePageProducts() {
                 name={name}
                 price={price}
                 description={description}
-                length={length}
               />
             );
           })}
         </Row>
       )}
+      <PaginationComponent />
     </>
   );
 }
