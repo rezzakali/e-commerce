@@ -23,12 +23,7 @@ function Navigation() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const {
-    data: categories,
-    isLoading,
-    isError,
-    error,
-  } = useGetCategoriesQuery();
+  const { data: categories, isLoading } = useGetCategoriesQuery();
 
   const handleLogout = () => {
     dispatch(Logout());
@@ -97,13 +92,15 @@ function Navigation() {
               </Nav.Link>
             </LinkContainer>
 
-            <NavDropdown title="Categories" id="collasible-nav-dropdown">
-              {categories?.categories?.map((c) => (
-                <NavDropdown.Item href="#action/3.1" key={c._id}>
-                  {c.name}
-                </NavDropdown.Item>
-              ))}
-            </NavDropdown>
+            {!isLoading && (
+              <NavDropdown title="Categories" id="collasible-nav-dropdown">
+                {categories?.categories?.map((c) => (
+                  <NavDropdown.Item href="#action/3.1" key={c._id}>
+                    {c.name}
+                  </NavDropdown.Item>
+                ))}
+              </NavDropdown>
+            )}
             <SearchForm />
           </Nav>
           <Nav>

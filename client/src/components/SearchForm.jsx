@@ -1,17 +1,44 @@
-import React from 'react';
-import { Button, Form } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Form } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { setSearchTerm } from '../features/filter/filterSlice';
 import styles from '../styles/SearchForm.module.css';
 
 function SearchForm() {
+  const [input, setInput] = useState('');
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    setInput(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(setSearchTerm(input));
+    setInput('');
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      handleSubmit(e);
+    }
+  };
+
   return (
-    <Form className="d-flex">
+    <Form
+      className="border-0 d-flex align-items-center justify-content-center"
+      onSubmit={handleSubmit}
+    >
       <Form.Control
         type="search"
-        placeholder="Search"
-        className={`me-1 ${styles.search_form}`}
+        size="sm"
+        placeholder="Search by name"
+        className={`rounded-0 ${styles.search_form}`}
         aria-label="Search"
+        value={input}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
       />
-      <Button className={`bg-light text-dark ${styles.button}`}>Search</Button>
     </Form>
   );
 }

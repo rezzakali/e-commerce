@@ -8,6 +8,7 @@ import ProductCard from './ProductCard';
 
 function HomePageProducts() {
   const { data: products, isLoading, isError } = useGetProductsQuery();
+  const { searchTerm } = useSelector((state) => state.filter);
 
   const { paginateProductsLists } = useSelector((state) => state.products);
 
@@ -66,18 +67,23 @@ function HomePageProducts() {
       <p className="mt-3 fs-4">All Collections</p>
       {!isLoading && (
         <Row>
-          {filteredProducts?.map((product) => {
-            const { _id, name, description, price } = product || {};
-            return (
-              <ProductCard
-                key={_id}
-                id={_id}
-                name={name}
-                price={price}
-                description={description}
-              />
-            );
-          })}
+          {filteredProducts
+            ?.filter((p) => {
+              if (searchTerm === '') return p;
+              return p.name.toLowerCase().includes(searchTerm.toLowerCase());
+            })
+            .map((product) => {
+              const { _id, name, description, price } = product || {};
+              return (
+                <ProductCard
+                  key={_id}
+                  id={_id}
+                  name={name}
+                  price={price}
+                  description={description}
+                />
+              );
+            })}
         </Row>
       )}
       <PaginationComponent />

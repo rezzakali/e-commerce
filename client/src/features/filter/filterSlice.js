@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   filterWord: '',
   priceRange: null,
+  searchTerm: '',
 };
 
 const filterSlice = createSlice({
@@ -15,9 +16,12 @@ const filterSlice = createSlice({
     setPrice: (state, action) => {
       state.priceRange = action.payload;
     },
+    setSearchTerm: (state, action) => {
+      state.searchTerm = action.payload;
+    },
   },
 });
 
-export const { setFilterWord, setPrice } = filterSlice.actions;
+export const { setFilterWord, setPrice, setSearchTerm } = filterSlice.actions;
 
 export default filterSlice.reducer;
