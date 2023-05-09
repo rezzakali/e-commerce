@@ -1,3 +1,4 @@
-.user_side_bar_lists:hover {
-  background-color: rgba(212, 210, 210, 0.171);
+.user_side_bar_lists {
+  border: 1px solid rgba(128, 128, 128, 0.089);
+  border-radius: none;
 }
