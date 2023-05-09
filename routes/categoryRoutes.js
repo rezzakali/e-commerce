@@ -4,6 +4,7 @@ import {
   categoryController,
   createCategoryController,
   deleteCategoryController,
+  getCategoryNameController,
   updateCategoryController,
 } from '../controllers/categoryContoller.js';
 
@@ -24,5 +25,8 @@ router.put('/update-category/:id', updateCategoryController);
 
 // delete category
 router.delete('/delete-category/:id', deleteCategoryController);
+
+// get single category by id
+router.get('/get-single-category/:cid', getCategoryNameController);
 
 export default router;

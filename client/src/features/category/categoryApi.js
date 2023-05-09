@@ -102,6 +102,13 @@ const categoryApi = apiSlice.injectEndpoints({
       },
       // optimistic cache udpate end from here
     }),
+
+    // get category name
+    getCategoryName: builder.query({
+      query: (cid) => ({
+        url: `/api/v1/category/get-single-category/${cid}`,
+      }),
+    }),
   }),
 });
 
@@ -110,4 +117,5 @@ export const {
   useAddCategoryMutation,
   useEditCategoryMutation,
   useDeleteCategoryMutation,
+  useGetCategoryNameQuery,
 } = categoryApi;

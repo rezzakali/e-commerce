@@ -113,3 +113,23 @@ export const deleteCategoryController = async (req, res) => {
     });
   }
 };
+
+// get product category (single product) || GET METHOD
+export const getCategoryNameController = async (req, res) => {
+  try {
+    const { cid } = req.params;
+    console.log(req.params);
+    const category = await categoryModel.findById({ _id: cid });
+    res.status(200).send({
+      success: true,
+      message: 'Success',
+      category,
+    });
+  } catch (err) {
+    res.status(500).send({
+      success: false,
+      message: 'There was a server side error!' || err?.message,
+      error: err,
+    });
+  }
+};

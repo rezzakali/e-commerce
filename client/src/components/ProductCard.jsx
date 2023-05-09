@@ -19,7 +19,9 @@ function ProductCard({ id, name, description, price }) {
         </Link>
 
         <Card.Body>
-          <p className="fs-5">{name}</p>
+          <p className="fs-5" style={{ textTransform: 'uppercase' }}>
+            {name}
+          </p>
           <p className="fs-5">₹ {price}.00</p>
           <Card.Text className="text-justify">
             {truncateString(description, 50)}
@@ -28,6 +30,7 @@ function ProductCard({ id, name, description, price }) {
             <Button
               size="sm"
               className={`w-auto rounded-0 ${styles.product_card_button}`}
+              style={{ textTransform: 'uppercase' }}
             >
               <BsCart4 role="button" /> Add to cart
             </Button>

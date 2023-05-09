@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import Layout from '../components/Layout';
 import Loading from '../components/Loading';
 import ProductCard from '../components/ProductCard';
+import { useGetCategoryNameQuery } from '../features/category/categoryApi';
 import {
   useGetSimilarProductsQuery,
   useGetSingleProductQuery,
@@ -22,6 +23,7 @@ function SingleProduct() {
     pid: id,
     cid,
   });
+  const { data: category } = useGetCategoryNameQuery(cid);
 
   return (
     <Layout>
@@ -38,15 +40,20 @@ function SingleProduct() {
             />
           </Col>
           <Col sm={12} md={8} lg={8}>
-            <h3>{name}</h3>
+            {/* product title */}
+            <h3 style={{ textTransform: 'uppercase' }}>{name}</h3>
+            <p className="fs-6" style={{ textTransform: 'uppercase' }}>
+              Category: {category?.category?.name}
+            </p>
             <h2>₹ {price}.00</h2>
             <p>{description}</p>
             <div>
               <Button
                 size="sm"
                 className={`w-auto rounded-0 ${styles.product_card_button}`}
+                style={{ textTransform: 'uppercase' }}
               >
-                <BsCart4 role="button" /> Add to cart
+                <BsCart4 role="button" size={20} /> Add to cart
               </Button>
             </div>
           </Col>
@@ -54,8 +61,11 @@ function SingleProduct() {
       )}
       <hr />
       <Row className="mx-1">
+        {similarProducts?.products?.length < 1 && (
+          <p className="text-center">No Similar Products</p>
+        )}
         <p className="fs-4" style={{ textTransform: 'uppercase' }}>
-          related Products
+          similar Products
         </p>
         {similarProducts?.products?.map((p) => {
           const { price, name, description, _id } = p || {};
