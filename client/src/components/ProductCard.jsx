@@ -13,7 +13,7 @@ function ProductCard({ id, name, description, price }) {
           <Card.Img
             variant="top"
             src={`http://127.0.0.1:9000/api/v1/products/get-product-image/${id}`}
-            style={{ height: '200px', width: '100%', objectFit: 'cover' }}
+            style={{ height: '300px', width: '100%', objectFit: 'cover' }}
             className="rounded-0"
           />
         </Link>

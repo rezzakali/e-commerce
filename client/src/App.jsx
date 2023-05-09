@@ -1,28 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import AdminRouteProtect from './admin/AdminDashboard';
+import ScrollToTopButton from './components/ScrollToTop';
 import UserPrivateRoute from './components/routes/UserPrivateRoute';
 import useAuthCheck from './hooks/useAuthCheck';
 import About from './pages/About';
+import AllCategoriesProducts from './pages/AllCategoriesProducts';
 import Cart from './pages/Cart';
+import CategoryWiseProducts from './pages/CategoryWiseProducts';
 import Contact from './pages/Contact';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import Men from './pages/Men';
 import NotFound from './pages/NotFound';
 import Orders from './pages/Orders';
 import Register from './pages/Register';
-import Women from './pages/Women';
+import SingleProduct from './pages/SingleProduct';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminOrders from './pages/admin/AdminOrders';
-import UserDashboard from './pages/user/UserDashboard';
-
-import ScrollToTopButton from './components/ScrollToTop';
-import SingleProduct from './pages/SingleProduct';
 import Categories from './pages/admin/Categories';
 import Customers from './pages/admin/Customers';
 import Products from './pages/admin/Products';
 import Settings from './pages/admin/Settings';
+import UserDashboard from './pages/user/UserDashboard';
 
 function App() {
   const authCheck = useAuthCheck();
@@ -52,8 +51,11 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/men" element={<Men />} />
-        <Route path="/women" element={<Women />} />
+        <Route
+          path="/categories/all-categories"
+          element={<AllCategoriesProducts />}
+        />
+        <Route path="/category/:slug" element={<CategoryWiseProducts />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/products/:id" element={<SingleProduct />} />
 

@@ -107,6 +107,20 @@ const productApi = apiSlice.injectEndpoints({
         url: `/api/v1/products/get-product-list?page=${page}`,
       }),
     }),
+
+    // get products based on their slug name
+    getProductsBasedOnSlugName: builder.query({
+      query: (slug) => ({
+        url: `/api/v1/products/get-product/${slug}`,
+      }),
+    }),
+
+    // get similar products
+    getSimilarProducts: builder.query({
+      query: ({ pid, cid }) => ({
+        url: `/api/v1/products/get-similar-products/${pid}/${cid}`,
+      }),
+    }),
   }),
 });
 
@@ -117,6 +131,8 @@ export const {
   useUpdateProductMutation,
   useGetSingleProductQuery,
   useGetPaginationProductsQuery,
+  useGetProductsBasedOnSlugNameQuery,
+  useGetSimilarProductsQuery,
 } = productApi;
 
 export default productApi;

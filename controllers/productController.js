@@ -1,5 +1,6 @@
 import fs from 'fs';
 import slugify from 'slugify';
+import categoryModel from '../models/categoryModel.js';
 import productModel from '../models/productModel.js';
 
 // add product
@@ -151,20 +152,25 @@ export const getAllProductsController = async (req, res) => {
   }
 };
 
-// get single product
+// get single product by slug
 export const getSingleProductController = async (req, res) => {
   try {
     const { slug } = req.params;
-    const product = await productModel
-      .findOne({ slug })
+    const category = await categoryModel.findOne({ slug });
+
+    const products = await productModel
+      .find({ category })
       .select('-image')
       .populate('category');
+
     res.status(200).send({
       success: false,
       message: 'Product fetched successfully!',
-      product,
+      products,
+      category,
     });
   } catch (err) {
+    console.log(err);
     res.status(500).send({
       success: false,
       message: err?.message || 'There was a server side error!',
@@ -178,7 +184,7 @@ export const getProductController = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const product = await productModel.findById(id);
+    const product = await productModel.findById(id).select('-image');
 
     res.status(200).send({
       success: true,
@@ -258,6 +264,30 @@ export const productListController = async (req, res) => {
     res.status(500).send({
       success: false,
       message: 'There was a server side error!' || err?.message,
+      error: err,
+    });
+  }
+};
+
+// get similar products || GET METHOD
+export const getSimilarProductController = async (req, res) => {
+  try {
+    const { pid, cid } = req.params;
+
+    const products = await productModel
+      .find({ category: cid, _id: { $ne: pid } })
+      .select('-image')
+      .limit(10);
+
+    res.status(200).send({
+      success: true,
+      message: 'Success',
+      products,
+    });
+  } catch (err) {
+    res.status(500).send({
+      success: false,
+      message: 'There was a server side error' || err?.message,
       error: err,
     });
   }

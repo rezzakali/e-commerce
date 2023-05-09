@@ -6,6 +6,7 @@ import {
   getAllProductsController,
   getProductController,
   getProductImageController,
+  getSimilarProductController,
   getSingleProductController,
   productListController,
   updateProductController,
@@ -37,5 +38,8 @@ router.delete('/delete-product/:pid', formidable(), deleteProductController);
 
 // get product list
 router.get('/get-product-list', formidable(), productListController);
+
+// get similar products
+router.get('/get-similar-products/:pid/:cid', getSimilarProductController);
 
 export default router;

@@ -31,3 +31,8 @@ body {
   outline: none;
   box-shadow: none;
 }
+
+/* category dropdown menu active  */
+.dropdown-item.active {
+  background-color: rgba(231, 43, 43, 0.74);
+}
