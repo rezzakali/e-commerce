@@ -32,7 +32,7 @@ function SearchForm() {
       <Form.Control
         type="search"
         size="sm"
-        placeholder="Search by name"
+        placeholder="Search by name only"
         className={`rounded-0 ${styles.search_form}`}
         aria-label="Search"
         value={input}

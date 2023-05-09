@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Button,
-  Container,
-  Dropdown,
-  Nav,
-  NavDropdown,
-  Navbar,
-} from 'react-bootstrap';
+import { Button, Container, Dropdown, Nav, Navbar } from 'react-bootstrap';
 import { BsCartPlus } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -91,16 +84,6 @@ function Navigation() {
                 Women
               </Nav.Link>
             </LinkContainer>
-
-            {!isLoading && (
-              <NavDropdown title="Categories" id="collasible-nav-dropdown">
-                {categories?.categories?.map((c) => (
-                  <NavDropdown.Item href="#action/3.1" key={c._id}>
-                    {c.name}
-                  </NavDropdown.Item>
-                ))}
-              </NavDropdown>
-            )}
             <SearchForm />
           </Nav>
           <Nav>
