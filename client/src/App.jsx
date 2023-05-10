@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import AdminRouteProtect from './admin/AdminDashboard';
 import ScrollToTopButton from './components/ScrollToTop';
 import UserPrivateRoute from './components/routes/UserPrivateRoute';
@@ -56,7 +57,6 @@ function App() {
           element={<AllCategoriesProducts />}
         />
         <Route path="/category/:slug" element={<CategoryWiseProducts />} />
-        <Route path="/cart" element={<Cart />} />
         <Route path="/products/:id" element={<SingleProduct />} />
 
         {/* login / register */}
@@ -64,9 +64,10 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         {/* user dashboard */}
-        <Route path="/dashboard" element={<UserPrivateRoute />}>
-          <Route path="user" element={<UserDashboard />} />
-          <Route path="user/orders" element={<Orders />} />
+        <Route path="/user" element={<UserPrivateRoute />}>
+          <Route path="" element={<UserDashboard />} />
+          <Route path="/user/orders" element={<Orders />} />
+          <Route path="cart" element={<Cart />} />
         </Route>
 
         {/* admin */}
@@ -81,6 +82,8 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       {showScrollButton && <ScrollToTopButton />}
+
+      <ToastContainer position="bottom-right" autoClose={3000} />
     </React.Fragment>
   );
 }

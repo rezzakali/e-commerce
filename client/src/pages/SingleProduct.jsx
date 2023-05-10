@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
 import { BsCart4 } from 'react-icons/bs';
-import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Layout from '../components/Layout';
 import Loading from '../components/Loading';
 import ProductCard from '../components/ProductCard';
+import { setCartItem } from '../features/cart/cartSlice';
 import { useGetCategoryNameQuery } from '../features/category/categoryApi';
 import {
   useGetSimilarProductsQuery,
@@ -16,14 +19,38 @@ function SingleProduct() {
   const { id } = useParams();
 
   const { data: product, isLoading, isError } = useGetSingleProductQuery(id);
-  const { name, price, description } = product?.product || {};
+  const { name, price, description, quantity } = product?.product || {};
 
   const cid = product?.product?.category;
   const { data: similarProducts } = useGetSimilarProductsQuery({
     pid: id,
     cid,
   });
+  const { cartItems } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.auth);
+
   const { data: category } = useGetCategoryNameQuery(cid);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [totalCartQuantity, setTotalCartQuantity] = useState(0);
+
+  // Calculate total quantity of the product in the cart
+  useEffect(() => {
+    const productInCart = cartItems.find((item) => item._id === id);
+    const totalQuantity = productInCart ? productInCart.cartQuantity : 0;
+    setTotalCartQuantity(totalQuantity);
+  }, [cartItems, id]);
+
+  const addToCartHandler = (product) => {
+    if (user && user.role === 'user') {
+      dispatch(setCartItem(product));
+    } else {
+      toast.warning('Need an account!');
+      navigate('/login');
+    }
+  };
 
   return (
     <Layout>
@@ -50,10 +77,15 @@ function SingleProduct() {
             <div>
               <Button
                 size="sm"
-                className={`w-auto rounded-0 ${styles.product_card_button}`}
+                className={`w-auto d-flex align-items-center justify-content-center rounded-0 ${styles.product_card_button}`}
                 style={{ textTransform: 'uppercase' }}
+                onClick={() => addToCartHandler(product?.product)}
+                disabled={quantity === 0 || totalCartQuantity >= quantity}
               >
-                <BsCart4 role="button" size={20} /> Add to cart
+                <BsCart4 role="button" size={20} className="mx-1" />
+                {quantity === 0 || totalCartQuantity >= quantity
+                  ? ' out of stock'
+                  : 'Add to cart'}
               </Button>
             </div>
           </Col>
@@ -67,18 +99,9 @@ function SingleProduct() {
         <p className="fs-4" style={{ textTransform: 'uppercase' }}>
           similar Products
         </p>
-        {similarProducts?.products?.map((p) => {
-          const { price, name, description, _id } = p || {};
-          return (
-            <ProductCard
-              key={_id}
-              id={_id}
-              name={name}
-              price={price}
-              description={description}
-            />
-          );
-        })}
+        {similarProducts?.products?.map((product) => (
+          <ProductCard key={product._id} product={product} />
+        ))}
       </Row>
     </Layout>
   );

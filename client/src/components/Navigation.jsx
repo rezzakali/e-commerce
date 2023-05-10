@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Button,
   Container,
@@ -7,11 +7,12 @@ import {
   NavDropdown,
   Navbar,
 } from 'react-bootstrap';
-import { BsCartPlus } from 'react-icons/bs';
+import { BsHandbag } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Logout } from '../features/auth/authSlice';
+import { getTotalAmount } from '../features/cart/cartSlice';
 import { useGetCategoriesQuery } from '../features/category/categoryApi';
 import styles from '../styles/Nav.module.css';
 import SearchForm from './SearchForm';
@@ -23,16 +24,31 @@ function Navigation() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // fetch categories || API requesting
   const { data: categories, isLoading } = useGetCategoriesQuery();
+  const { cartItems } = useSelector((state) => state.cart);
+
+  useEffect(() => {
+    dispatch(getTotalAmount());
+  }, [dispatch, cartItems]);
+
+  // cart
+  const { totalQuantity } = useSelector((state) => state.cart);
 
   const handleLogout = () => {
     dispatch(Logout());
     localStorage.removeItem('auth');
+    localStorage.removeItem('cartItems');
     navigate('/login');
   };
 
   return (
-    <Navbar collapseOnSelect expand="lg" className="z-1 bg-light" sticky="top">
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      className="z-1 bg-light border-bottom"
+      sticky="top"
+    >
       <Container fluid>
         <LinkContainer to="/">
           <Nav.Link className="fs-2">e-shop</Nav.Link>
@@ -46,7 +62,7 @@ function Navigation() {
             <LinkContainer to="/">
               <Nav.Link
                 to="/"
-                className={pathname == '/' && 'border-bottom border-secondary'}
+                className={pathname == '/' && `${styles.nav_underline}`}
               >
                 Home
               </Nav.Link>
@@ -54,9 +70,7 @@ function Navigation() {
             <LinkContainer to="/about">
               <Nav.Link
                 to="/about"
-                className={
-                  pathname == '/about' && 'border-bottom border-secondary'
-                }
+                className={pathname == '/about' && `${styles.nav_underline}`}
               >
                 About
               </Nav.Link>
@@ -64,9 +78,7 @@ function Navigation() {
             <LinkContainer to="/contact">
               <Nav.Link
                 to="/contact"
-                className={
-                  pathname == '/contact' && 'border-bottom border-secondary'
-                }
+                className={pathname == '/contact' && `${styles.nav_underline}`}
               >
                 Contact
               </Nav.Link>
@@ -98,8 +110,8 @@ function Navigation() {
 
                   <Dropdown.Menu>
                     <LinkContainer
-                      to={`/dashboard/${
-                        user?.role === 'admin' ? 'admin' : 'user'
+                      to={`/${
+                        user?.role === 'admin' ? 'dashboard/admin' : 'user'
                       }`}
                     >
                       <Nav.Link>Dashboard</Nav.Link>
@@ -113,10 +125,10 @@ function Navigation() {
                     </Button>
                   </Dropdown.Menu>
                 </Dropdown>
-                <LinkContainer to="/cart">
-                  <Nav.Link to="/cart">
-                    <BsCartPlus />
-                    <span>(10)</span>
+                <LinkContainer to="/user/cart">
+                  <Nav.Link to="/user/cart">
+                    <BsHandbag />
+                    <span>({totalQuantity})</span>
                   </Nav.Link>
                 </LinkContainer>
               </>
@@ -127,12 +139,6 @@ function Navigation() {
                 </LinkContainer>
                 <LinkContainer to="/register">
                   <Nav.Link>Register</Nav.Link>
-                </LinkContainer>
-                <LinkContainer to="/cart">
-                  <Nav.Link>
-                    <BsCartPlus />
-                    <span>(0)</span>
-                  </Nav.Link>
                 </LinkContainer>
               </>
             )}

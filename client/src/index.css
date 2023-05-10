@@ -36,3 +36,15 @@ body {
 .dropdown-item.active {
   background-color: rgba(231, 43, 43, 0.74);
 }
+
+/* quantity input text */
+#quantity_input {
+  width: 60px;
+  border: none;
+}
+#quantity_input:active,
+#quantity_input:focus {
+  box-shadow: none;
+  outline: none;
+  border: none;
+}

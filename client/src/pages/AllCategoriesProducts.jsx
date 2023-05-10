@@ -19,23 +19,14 @@ function AllCategoriesProducts() {
     content = (
       <Row className="mt-5 mx-1">
         <p className="fs-5">ALL PRODUCTS ({products?.products?.length})</p>
-        {products.products
-          .filter((p) => {
+        {products?.products
+          ?.filter((p) => {
             if (searchTerm === '') return p;
             return p.name.toLowerCase().includes(searchTerm.toLowerCase());
           })
-          .map((product) => {
-            const { _id, name, description, price } = product || {};
-            return (
-              <ProductCard
-                key={_id}
-                id={_id}
-                name={name}
-                price={price}
-                description={description}
-              />
-            );
-          })}
+          .map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
       </Row>
     );
 

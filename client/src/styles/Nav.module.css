@@ -7,3 +7,6 @@
   outline: none;
   box-shadow: none;
 }
+.nav_underline {
+  border-bottom: 1px solid #e84e4e;
+}
