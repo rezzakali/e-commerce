@@ -14,6 +14,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import Orders from './pages/Orders';
+import PaymentSuccess from './pages/PaymentSuccess';
 import Register from './pages/Register';
 import SingleProduct from './pages/SingleProduct';
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -62,6 +63,9 @@ function App() {
         {/* login / register */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        {/* payment success */}
+        <Route path="/payment-success" element={<PaymentSuccess />} />
 
         {/* user dashboard */}
         <Route path="/user" element={<UserPrivateRoute />}>

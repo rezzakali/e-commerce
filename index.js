@@ -10,6 +10,8 @@ import connectDb from './config/db.js';
 import errorHandler from './middlewares/errorHandler.js';
 import authRoutes from './routes/authRoutes.js';
 import categoryRoutes from './routes/categoryRoutes.js';
+import ordersRoutes from './routes/ordersRoutes.js';
+import paymentRoutes from './routes/paymentRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 
 // config dotenv
@@ -36,6 +38,8 @@ app.use(morgan('dev'));
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/category', categoryRoutes);
 app.use('/api/v1/products', productRoutes);
+app.use('/api/v1/payment', paymentRoutes);
+app.use('/api/v1/orders', ordersRoutes);
 
 // error handler || mongodb related
 app.use(errorHandler);

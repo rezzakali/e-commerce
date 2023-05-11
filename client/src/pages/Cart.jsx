@@ -4,7 +4,6 @@ import { BiArrowBack } from 'react-icons/bi';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import EmptyCartImage from '../../public/EmptyCart.png';
 import Layout from '../components/Layout';
 import {
   decreaseCartItem,
@@ -13,6 +12,7 @@ import {
   removeCartItem,
   setCartItem,
 } from '../features/cart/cartSlice';
+import { usePaymentMutation } from '../features/payment/paymentApi';
 import classes from '../styles/CartPageTable.module.css';
 import styles from '../styles/ProductCardButton.module.css';
 
@@ -20,8 +20,10 @@ function Cart() {
   const { cartItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { totalAmount } = useSelector((state) => state.cart);
+
   const { user } = useSelector((state) => state.auth);
+
+  const { totalAmount } = useSelector((state) => state.cart);
 
   useEffect(() => {
     dispatch(getTotalAmount());
@@ -47,6 +49,19 @@ function Cart() {
   };
   let grandTotal = 0;
 
+  const [payment, { data: response, isLoading }] = usePaymentMutation();
+
+  // payment handler
+  const handlePayment = () => {
+    payment({ cartItems, userId: user?._id });
+  };
+
+  useEffect(() => {
+    if (response) {
+      window.location.href = response.url;
+    }
+  }, [response]);
+
   return (
     <Layout
       title={'Cart - e-shop'}
@@ -57,7 +72,7 @@ function Cart() {
       {cartItems?.length === 0 ? (
         <div className="d-flex align-items-center justify-content-center flex-column">
           <img
-            src={EmptyCartImage}
+            src={`/EmptyCart.png`}
             alt="empty_cart"
             style={{ width: '300px', height: 'auto' }}
             className="mt-5"
@@ -187,8 +202,10 @@ function Cart() {
                       size="sm"
                       className={`w-100 py-2 rounded-0 ${styles.product_card_button}`}
                       style={{ textTransform: 'uppercase' }}
+                      onClick={handlePayment}
+                      disabled={isLoading}
                     >
-                      proceed to checkout
+                      {isLoading ? 'Loading...' : 'proceed to checkout'}
                     </Button>
                   </ListGroup.Item>
                 </ListGroup>
