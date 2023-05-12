@@ -4,6 +4,7 @@ import { BiArrowBack } from 'react-icons/bi';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Layout from '../components/Layout';
 import {
   decreaseCartItem,
@@ -49,18 +50,35 @@ function Cart() {
   };
   let grandTotal = 0;
 
-  const [payment, { data: response, isLoading }] = usePaymentMutation();
+  const [payment, { data: response, isLoading, isError, error }] =
+    usePaymentMutation();
 
   // payment handler
   const handlePayment = () => {
-    payment({ cartItems, userId: user?._id });
+    const newCartItems = cartItems.map((item) => {
+      const {
+        description,
+        createdAt,
+        updatedAt,
+        quantity,
+        ...rest
+      } = item;
+      return rest;
+    });
+    payment({ cartItems: newCartItems, userId: user?._id });
   };
 
   useEffect(() => {
     if (response) {
       window.location.href = response.url;
     }
-  }, [response]);
+  }, [response, isError]);
+
+  useEffect(() => {
+    if (isError) {
+      toast.warning(error?.data?.message);
+    }
+  }, [isError, error, response]);
 
   return (
     <Layout

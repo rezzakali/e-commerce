@@ -7,6 +7,7 @@ const orderSchema = mongoose.Schema(
       {
         productId: { type: mongoose.ObjectId },
         quantity: { type: Number, default: 1 },
+        productName: { type: String, required: true },
       },
     ],
     subtotal: { type: Number, required: true },
@@ -14,6 +15,7 @@ const orderSchema = mongoose.Schema(
     shipping: { type: Object, required: true },
     delivery_status: { type: String, default: 'pending' },
     payment_status: { type: String, required: true },
+    orderStatus: { type: String, default: 'success' },
   },
   { timestamps: true }
 );

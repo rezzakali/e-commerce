@@ -1,10 +1,11 @@
 import orderModel from '../models/orderModel.js';
 
+// user order controller
 export const userOrderController = async (req, res) => {
   try {
     const { userId } = req.params;
     const orders = await orderModel.find({ userId });
-    console.log(orders);
+    // console.log(orders);
     res.status(200).send({
       success: true,
       message: 'Fetched successfully!',

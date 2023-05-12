@@ -43,7 +43,10 @@ function Footer() {
   ];
 
   return (
-    <footer className="container-fluid bg-dark text-white pt-4 pb-1">
+    <footer
+      className="container-fluid bg-dark text-white pt-4 pb-1"
+      style={{ position: 'relative', zIndex: 100 }}
+    >
       <Container fluid>
         <Row>
           <Col sm={12} md={6} lg={3}>

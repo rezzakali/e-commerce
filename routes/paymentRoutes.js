@@ -10,10 +10,19 @@ const router = express.Router();
 router.post('/create-checkout-session', async (req, res) => {
   const { cartItems, userId } = req.body;
 
+  const cartItemsString = JSON.stringify(cartItems);
+
+  if (cartItemsString.length > 500) {
+    return res.status(400).send({
+      message:
+        'Sorry, we are unable to process your request as the items in your cart exceed the maximum allowed limit. Please remove some items and try again.',
+    });
+  }
+
   const customer = await stripe.customers.create({
     metadata: {
       userId,
-      cart: JSON.stringify(cartItems),
+      cart: cartItemsString,
     },
   });
 
@@ -92,17 +101,15 @@ router.post('/create-checkout-session', async (req, res) => {
   res.send({ url: session.url });
 });
 
-// Create order function
-
+// create order to save it to database
 const createOrder = async (customer, data) => {
   const Items = JSON.parse(customer.metadata.cart);
 
-  const products = Items.map((item) => {
-    return {
-      productId: item._id,
-      quantity: item.cartQuantity,
-    };
-  });
+  const products = Items.map(({ _id, cartQuantity, name }) => ({
+    productId: _id,
+    quantity: cartQuantity,
+    productName: name,
+  }));
 
   const newOrder = new orderModel({
     userId: customer.metadata.userId,
@@ -118,16 +125,9 @@ const createOrder = async (customer, data) => {
   try {
     await newOrder.save();
   } catch (err) {
-    res.status(500).send('There was a server side error!');
+    console.log(err);
   }
 };
-
-// webhooks implements
-
-// This is your Stripe CLI webhook secret for testing your endpoint locally.
-let endpointSecret;
-// endpointSecret =
-//   'whsec_94f8c11dee66b4422ab040f0a5a0b4d7fc395a843fe554833edb894b9035bac1';
 
 router.post(
   '/webhook',
@@ -136,14 +136,12 @@ router.post(
     let data;
     let eventType;
 
-    // Check if webhook signing is configured.
+    // const webhookSecret = process.env.STRIPE_WEB_HOOK_SECRET;
     let webhookSecret;
-    //webhookSecret = process.env.STRIPE_WEB_HOOK;
 
     if (webhookSecret) {
-      // Retrieve the event by verifying the signature using the raw body and secret.
       let event;
-      let signature = req.headers['stripe-signature'];
+      const signature = req.headers['stripe-signature'];
 
       try {
         event = stripe.webhooks.constructEvent(
@@ -155,31 +153,27 @@ router.post(
         console.log(`⚠️  Webhook signature verification failed:  ${err}`);
         return res.sendStatus(400);
       }
-      // Extract the object from the event.
+
       data = event.data.object;
       eventType = event.type;
     } else {
-      // Webhook signing is recommended, but if the secret is not configured in `config.js`,
-      // retrieve the event data directly from the request body.
       data = req.body.data.object;
       eventType = req.body.type;
     }
 
-    // Handle the checkout.session.completed event
     if (eventType === 'checkout.session.completed') {
       stripe.customers
         .retrieve(data.customer)
         .then(async (customer) => {
           try {
-            // CREATE ORDER
             createOrder(customer, data);
           } catch (err) {
-            // console.log(typeof createOrder);
-            // console.log(err);
-            res.status(500).send('Serve side error!');
+            res.status(500).send('Server side error!');
           }
         })
-        .catch((err) => res.send('Server side error!' || err.message));
+        .catch((err) => {
+          res.send('Server side error!' || err.message);
+        });
     }
 
     res.status(200).end();
