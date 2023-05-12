@@ -99,7 +99,7 @@ function CategoriesTable() {
       />
       <Table className="table-hover text-center">
         {!isLoading && categories?.categories?.length !== 0 && (
-          <thead>
+          <thead className="sticky-top bg-light">
             <tr>
               <th>_id</th>
               <th>Name</th>

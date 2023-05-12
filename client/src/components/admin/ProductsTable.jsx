@@ -141,7 +141,7 @@ function ProductsTable() {
     <>
       <Table className="table-hover text-center">
         {!isLoading && products?.products?.length !== 0 && (
-          <thead>
+          <thead className="sticky-top bg-light">
             <tr>
               <th>_id</th>
               <th>Name</th>

@@ -11,6 +11,7 @@ import AdminGreeting from '../../components/admin/AdminGreeting';
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import DashboardCard from '../../components/admin/DashboardCard';
 import DashboardTable from '../../components/admin/DashboardTable';
+import { useGetAllOrdersQuery } from '../../features/order/orderApi';
 import { useGetProductsQuery } from '../../features/product/productApi';
 
 function AdminDashboard() {
@@ -18,11 +19,40 @@ function AdminDashboard() {
 
   const totalProducts = products?.products?.length;
 
+  const {
+    data: orders,
+    isLoading: isOrderLoading,
+    isError: isOrderError,
+    error: orderError,
+  } = useGetAllOrdersQuery();
+
+  // total orders length
+  const totalOrders = orders?.orders?.length;
+
+  // total amount || All product || All orders
+  const totalAmount = orders?.orders?.reduce(
+    (acc, order) => acc + order.total,
+    0
+  );
+
+  // find out only the cancel orders length
+  const cencelOrdersLength = orders?.orders?.filter(
+    (order) => order.delivery_status === 'cancel'
+  )?.length;
+
+  // find out only the delivered orders length
+  const deliveredOrdersLength = orders?.orders?.filter(
+    (order) => order.delivery_status === 'delivered'
+  )?.length;
+
   useEffect(() => {
     if (isError) {
       toast.error(error?.data?.message);
     }
-  }, [isError]);
+    if (isOrderError) {
+      toast.error(orderError?.data?.message);
+    }
+  }, [isError, isOrderError]);
 
   return (
     <Layout title="Admin - Dashboard">
@@ -42,28 +72,29 @@ function AdminDashboard() {
             />
             <DashboardCard
               title="Total Orders"
-              amount={50}
-              icon={<BsFillCartCheckFill size={35} />}
+              amount={totalOrders}
+              icon={<BsFillCartCheckFill size={35} color="#262A56" />}
+              isLoading={isOrderLoading}
             />
             <DashboardCard
               title="Confirm Orders"
-              amount={24}
-              icon={<GiConfirmed size={35} />}
+              amount={totalOrders}
+              icon={<GiConfirmed size={35} color="green" />}
             />
             <DashboardCard
               title="Total Delivered"
-              amount={20}
-              icon={<TbTruckDelivery size={35} />}
+              amount={deliveredOrdersLength}
+              icon={<TbTruckDelivery size={35} color="#FC4F00" />}
             />
             <DashboardCard
               title="Cancel Orders"
-              amount={2}
-              icon={<ImCancelCircle size={35} />}
+              amount={cencelOrdersLength}
+              icon={<ImCancelCircle size={35} color="red" />}
             />
             <DashboardCard
               title="Total Earnings"
-              amount={`$154201.00`}
-              icon={<GiReceiveMoney size={35} />}
+              amount={`₹ ${totalAmount}.00`}
+              icon={<GiReceiveMoney size={35} color="#FFD95A" />}
             />
           </Row>
           <Row>

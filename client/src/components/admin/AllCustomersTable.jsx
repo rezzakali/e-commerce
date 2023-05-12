@@ -68,7 +68,7 @@ function AllCustomersTable() {
   return (
     <Table className="table-hover text-center">
       {!isLoading && users?.users?.length !== 0 && (
-        <thead>
+        <thead className="sticky-top bg-light">
           <tr>
             <th>_id</th>
             <th>Name</th>
