@@ -67,7 +67,7 @@ function AdminDashboard() {
             <DashboardCard
               title="Total Products"
               amount={totalProducts}
-              icon={<FaBox size={35} />}
+              icon={<FaBox size={30} color="yellowgreen" />}
               isLoading={isLoading}
             />
             <DashboardCard

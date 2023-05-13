@@ -31,7 +31,7 @@ function AdminOrders() {
         </Col>
         <Col sm={12} md={10} lg={10}>
           <p className="fs-4 my-3">All Orders</p>
-          <div style={{ maxHeight: '300px', overflowY: 'scroll' }}>
+          <div style={{ overflowY: 'scroll' }}>
             {isLoading && <Loading />}
             {isError && <p>Something went wrong</p>}
             <div className="shadow-sm border-0 rounded-0">
