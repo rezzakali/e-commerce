@@ -46,6 +46,7 @@ export const addProductController = async (req, res) => {
     }
 
     await product.save();
+
     res.status(201).send({
       success: true,
       message: 'Product addedd successfully!',

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
-import { toast } from 'react-hot-toast';
 import { AiFillLock } from 'react-icons/ai';
 import { BsTelephoneInboundFill } from 'react-icons/bs';
 import { FaUserAlt } from 'react-icons/fa';
@@ -8,6 +7,7 @@ import { GrMail } from 'react-icons/gr';
 import { HiLocationMarker } from 'react-icons/hi';
 import { RiQuestionAnswerLine } from 'react-icons/ri';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import registerImage from '../assets/signup.png';
 import Layout from '../components/Layout';
 import TextInput from '../components/TextInput';
@@ -22,6 +22,7 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [address, setAddress] = useState('');
   const [answer, setAnswer] = useState('');
+  const [profile, setProfile] = useState('');
 
   const navigate = useNavigate();
 
@@ -51,9 +52,19 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      toast.error('Password mismatched!');
+      toast.warning('Password mismatched!');
     } else {
-      register({ name, email, phone, address, password, answer });
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('phone', phone);
+      formData.append('password', password);
+      formData.append('address', address);
+      formData.append('answer', answer);
+      formData.append('profile', profile);
+
+      // hit API
+      register(formData);
     }
   };
 
@@ -147,6 +158,29 @@ function Register() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
+            <br />
+            <TextInput
+              type="file"
+              required
+              size="sm"
+              name="profile"
+              onChange={(e) => setProfile(e.target.files[0])}
+            />
+            <br />
+            {profile && (
+              <div className="text-center">
+                <img
+                  src={URL.createObjectURL(profile)}
+                  alt="profile"
+                  style={{
+                    height: '60px',
+                    width: '60px',
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                  }}
+                />
+              </div>
+            )}
             <br />
             <Button
               type="submit"

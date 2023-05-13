@@ -1,3 +1,4 @@
+import fs from 'fs';
 import JWT from 'jsonwebtoken';
 import { comparePassword, hashPassword } from '../helpers/authHelper.js';
 import userModel from '../models/userModel.js';
@@ -5,7 +6,9 @@ import userModel from '../models/userModel.js';
 // register controller
 export const registerController = async (req, res) => {
   try {
-    const { name, email, phone, password, address, answer } = req.body.data;
+    const { name, email, phone, password, answer, address } = req.fields;
+
+    const { profile } = req.files;
 
     if (!name) {
       res.status(400).send({ message: 'Name is required!' });
@@ -25,6 +28,15 @@ export const registerController = async (req, res) => {
     }
     if (!answer) {
       res.status(400).send({ message: 'Answer is required!' });
+    }
+    if (!profile) {
+      res.status(400).send({ message: 'Profile is required!' });
+    }
+    if (profile && profile.size > 2000000) {
+      res.status(400).send({
+        message:
+          'Product image is require and should be less than or equal to 2MB',
+      });
     }
 
     // check exist user
@@ -50,6 +62,11 @@ export const registerController = async (req, res) => {
       address,
       answer,
     });
+
+    if (profile) {
+      newUser.profile.data = fs.readFileSync(profile.path);
+      newUser.profile.contentType = profile.type;
+    }
 
     await newUser.save();
     res.status(201).send({
@@ -206,6 +223,113 @@ export const deleteUserController = async (req, res) => {
     res.status(500).send({
       success: false,
       message: err?.message,
+      error: err,
+    });
+  }
+};
+
+// get user profile image
+
+export const getUserProfileImageController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await userModel.findById(id).select('profile');
+    if (user.profile.data) {
+      res.set('Content-type', user.profile.contentType);
+      return res.status(200).send(user.profile.data);
+    }
+  } catch (err) {
+    res.status(500).send({
+      success: false,
+      message: 'There was a server side error!' || err?.message,
+      error: err,
+    });
+  }
+};
+
+// update user information
+export const updateUserInformationController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { updateName, updateEmail, updateAddress, updateAnswer } = req.body;
+
+    if (!updateName || !updateEmail || !updateAddress || !updateAnswer) {
+      res.status(400).send({
+        success: false,
+        message: 'Every field must be reqired!',
+      });
+    }
+
+    const updatedUser = await userModel.findByIdAndUpdate(
+      { _id: id },
+      {
+        name: updateName,
+        email: updateEmail,
+        address: updateAddress,
+        answer: updateAnswer,
+      },
+      { new: true }
+    );
+
+    // generate token
+    const token = JWT.sign({ _id: updatedUser._id }, process.env.JWT_SECRET, {
+      expiresIn: '7d',
+    });
+
+    res.status(200).send({
+      success: true,
+      message: 'User udpated successfully!',
+      user: updatedUser,
+      token,
+    });
+  } catch (err) {
+    res.status(500).send({
+      success: false,
+      message: 'There was a server side error!' || err?.message,
+      error: err,
+    });
+  }
+};
+
+// update user profile picture controller
+export const updateUserProfilePictureController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { profilePicture } = req.files;
+
+    if (profilePicture && profilePicture.size > 2000000) {
+      return res.status(400).send({
+        message:
+          'Product image is require and should be less than or equal to 2MB',
+      });
+    }
+
+    const updatedUser = await userModel.findByIdAndUpdate(
+      { _id: id },
+      {
+        profile: {
+          data: fs.readFileSync(profilePicture.path),
+          contentType: profilePicture.type,
+        },
+      },
+      { new: true }
+    );
+
+    // generate token
+    const token = JWT.sign({ _id: updatedUser._id }, process.env.JWT_SECRET, {
+      expiresIn: '7d',
+    });
+
+    res.status(200).send({
+      success: true,
+      message: 'Profile picture changed!',
+      user: updatedUser,
+      token,
+    });
+  } catch (err) {
+    res.status(500).send({
+      success: false,
+      message: 'There was a server side error!' || err?.message,
       error: err,
     });
   }

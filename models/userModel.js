@@ -29,6 +29,10 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    profile: {
+      data: Buffer,
+      contentType: String,
+    },
     role: {
       type: String,
       default: 'user',

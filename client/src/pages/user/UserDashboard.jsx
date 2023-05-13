@@ -8,7 +8,7 @@ function UserDashboard() {
   return (
     <Layout title="User-dashboard">
       <Row className="pt-1" style={{ height: '100vh' }}>
-        <Col sm={12} md={2} lg={2} className="shadow">
+        <Col sm={12} md={2} lg={2} className="shadow-sm">
           <UserSidebar />
         </Col>
         <Col sm={12} md={10} lg={10} className="">

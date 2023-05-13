@@ -5,12 +5,11 @@ const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // register
     register: builder.mutation({
-      query: (data) => ({
+      query: (formData) => ({
         url: `/api/v1/auth/register`,
         method: 'POST',
-        body: {
-          data,
-        },
+        body: formData,
+        formData: true,
       }),
     }),
 
@@ -46,6 +45,70 @@ const authApi = apiSlice.injectEndpoints({
       },
     }),
 
+    // update user information by user
+    updateUserInfo: builder.mutation({
+      query: ({ data, id }) => ({
+        url: `/api/v1/auth/update-user-information/${id}`,
+        body: data,
+        method: 'PATCH',
+      }),
+
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const response = await queryFulfilled;
+
+          localStorage.setItem(
+            'auth',
+            JSON.stringify({
+              accessToken: response?.data?.token,
+              user: response?.data?.user,
+            })
+          );
+
+          dispatch(
+            Login({
+              accessToken: response?.data?.token,
+              user: response?.data?.user,
+            })
+          );
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    }),
+
+    // update profile picture
+    updateUserProfilePicture: builder.mutation({
+      query: ({ profilePicture, id }) => ({
+        url: `/api/v1/auth/update-user-profile-picture/${id}`,
+        body: profilePicture,
+        method: 'PATCH',
+        formData: true,
+      }),
+
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const response = await queryFulfilled;
+
+          localStorage.setItem(
+            'auth',
+            JSON.stringify({
+              accessToken: response?.data?.token,
+              user: response?.data?.user,
+            })
+          );
+
+          dispatch(
+            Login({
+              accessToken: response?.data?.token,
+              user: response?.data?.user,
+            })
+          );
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    }),
     // forgot password
     forgotPassword: builder.mutation({
       query: (data) => ({
@@ -99,4 +162,6 @@ export const {
   useUpdateAdminMutation,
   useGetAllUsersQuery,
   useDeleteUserMutation,
+  useUpdateUserInfoMutation,
+  useUpdateUserProfilePictureMutation,
 } = authApi;
