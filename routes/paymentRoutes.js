@@ -105,10 +105,11 @@ router.post('/create-checkout-session', async (req, res) => {
 const createOrder = async (customer, data) => {
   const Items = JSON.parse(customer.metadata.cart);
 
-  const products = Items.map(({ _id, cartQuantity, name }) => ({
+  const products = Items.map(({ _id, cartQuantity, name, price }) => ({
     productId: _id,
     quantity: cartQuantity,
     productName: name,
+    price,
   }));
 
   const newOrder = new orderModel({

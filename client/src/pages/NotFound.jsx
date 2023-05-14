@@ -6,7 +6,7 @@ import Layout from '../components/Layout';
 function NotFound() {
   return (
     <Layout
-      title={'page not found'}
+      title={'e-Shop -Not Found'}
       keywords={'not found'}
       author={'Rezzak'}
       description={'page not found'}

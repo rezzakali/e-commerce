@@ -26,6 +26,13 @@ import Settings from './pages/admin/Settings';
 import UserDashboard from './pages/user/UserDashboard';
 
 function App() {
+  // spinner while rending ui
+  const spinner = document.getElementById('spinner');
+
+  if (spinner && !spinner.hasAttribute('hidden')) {
+    spinner.setAttribute('hidden', 'true');
+  }
+
   const authCheck = useAuthCheck();
 
   const [showScrollButton, setShowScrollButton] = useState(false);

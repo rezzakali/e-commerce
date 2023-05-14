@@ -39,7 +39,7 @@ function CategoryWiseProducts() {
       </Row>
     );
 
-  return <Layout>{content}</Layout>;
+  return <Layout title={`e-Shop -Category`}>{content}</Layout>;
 }
 
 export default CategoryWiseProducts;

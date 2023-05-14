@@ -67,10 +67,10 @@ function AdminSidebar() {
           <ListGroup.Item
             key={id}
             as="li"
-            className="border-0 my-1"
+            className="border-0 my-1 d-flex align-items-center"
             role="button"
           >
-            <div className="d-flex flex-row">
+            <div className="d-flex flex-row align-items-center">
               <span className="mx-1">{icon}</span>
               <NavLink to={link} className="text-decoration-none text-dark">
                 {title}{' '}

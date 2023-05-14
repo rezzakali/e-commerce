@@ -251,6 +251,7 @@ export const productListController = async (req, res) => {
       .find({})
       .skip((page - 1) * perPage)
       .limit(perPage)
+      .populate('category')
       .select('-image')
       .sort({ createdAt: -1 });
 
@@ -261,7 +262,6 @@ export const productListController = async (req, res) => {
       pageCount,
     });
   } catch (err) {
-    console.log(err);
     res.status(500).send({
       success: false,
       message: 'There was a server side error!' || err?.message,

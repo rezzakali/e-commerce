@@ -4,7 +4,7 @@ import { Card, Col } from 'react-bootstrap';
 function DashboardCard({ title, amount, icon, isLoading }) {
   return (
     <Col>
-      <Card className="shadow">
+      <Card className="shadow-sm">
         <Card.Body>
           <div className="d-flex flex-row justify-content-around">
             <div

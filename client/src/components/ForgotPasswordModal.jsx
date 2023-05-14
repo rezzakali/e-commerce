@@ -6,6 +6,7 @@ import { AiFillLock } from 'react-icons/ai';
 import { GrMail } from 'react-icons/gr';
 import { RiQuestionAnswerLine } from 'react-icons/ri';
 import { useForgotPasswordMutation } from '../features/auth/authApi';
+import styles from '../styles/ProductCardButton.module.css';
 import TextInput from './TextInput';
 
 function ForgotPasswordModal({ show, handleClose, setShow }) {
@@ -79,7 +80,7 @@ function ForgotPasswordModal({ show, handleClose, setShow }) {
           />
           <br />
           <Button
-            className="w-100 bg-light text-dark border border-gray"
+            className={`w-100 border border-gray ${styles.product_card_button}`}
             size="sm"
             type="submit"
             disabled={isLoading}

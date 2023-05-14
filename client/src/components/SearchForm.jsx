@@ -26,14 +26,14 @@ function SearchForm() {
 
   return (
     <Form
-      className="border-0 d-flex align-items-center justify-content-center"
+      className="border-0 d-flex align-items-center justify-content-center w-50 mx-auto"
       onSubmit={handleSubmit}
     >
       <Form.Control
         type="search"
         size="sm"
         placeholder="Search by name only"
-        className={`rounded-0 ${styles.search_form}`}
+        className={`rounded-0 w-100 ${styles.search_form}`}
         aria-label="Search"
         value={input}
         onChange={handleChange}

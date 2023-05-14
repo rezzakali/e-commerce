@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Button, Row } from 'react-bootstrap';
 import { AiFillLock } from 'react-icons/ai';
 import { BsTelephoneInboundFill } from 'react-icons/bs';
 import { FaUserAlt } from 'react-icons/fa';
@@ -8,10 +8,10 @@ import { HiLocationMarker } from 'react-icons/hi';
 import { RiQuestionAnswerLine } from 'react-icons/ri';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import registerImage from '../assets/signup.png';
 import Layout from '../components/Layout';
 import TextInput from '../components/TextInput';
 import { useRegisterMutation } from '../features/auth/authApi';
+import styles from '../styles/ProductCardButton.module.css';
 import isEmailValid from '../utils/isEmailValid';
 
 function Register() {
@@ -79,16 +79,17 @@ function Register() {
   }, [isSuccess, isError, data]);
 
   return (
-    <Layout>
-      <Row className="p-3">
-        <Col sm={12} md={6} lg={6}>
-          <img
-            src={registerImage}
-            alt="register image"
-            className="h-100 w-100 object-fit-cover"
-          />
-        </Col>
-        <Col className="p-5" sm={12} md={6} lg={6}>
+    <Layout title={`e-Shop -Register`}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '100vh',
+        }}
+      >
+        <Row>
+          <h4 className="py-1">Register</h4>
           <form onSubmit={handleSubmit}>
             <TextInput
               type="text"
@@ -181,11 +182,11 @@ function Register() {
                 />
               </div>
             )}
-            <br />
             <Button
               type="submit"
-              className="w-100 bg-light text-dark border border-gray"
+              className={`w-100 border border-gray ${styles.product_card_button}`}
               disabled={isLoading}
+              size="sm"
             >
               {isLoading ? (
                 <span
@@ -198,15 +199,14 @@ function Register() {
               )}
             </Button>
           </form>
-          <br />
-          <div>
-            Already have an account!{' '}
+          <div className="mb-5 d-flex mt-2">
+            <p className="mx-1"> Already have an account ! </p>{' '}
             <NavLink to="/login" className="text-decoration-none">
               Login
             </NavLink>
           </div>
-        </Col>
-      </Row>
+        </Row>
+      </div>
     </Layout>
   );
 }

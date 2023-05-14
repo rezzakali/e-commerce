@@ -68,7 +68,7 @@ function AllCustomersTable() {
   return (
     <Table className="table-hover text-center">
       {!isLoading && users?.users?.length !== 0 && (
-        <thead className="sticky-top bg-light">
+        <thead className="sticky-top bg-light" style={{ zIndex: '100' }}>
           <tr>
             <th>_id</th>
             <th>Name</th>

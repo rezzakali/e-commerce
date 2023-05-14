@@ -53,7 +53,7 @@ function SingleProduct() {
   };
 
   return (
-    <Layout>
+    <Layout title={`e-Shop -Single Product`}>
       {isError && <p>Something went wrong</p>}
       {isLoading ? (
         <Loading />

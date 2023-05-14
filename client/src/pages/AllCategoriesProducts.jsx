@@ -30,7 +30,7 @@ function AllCategoriesProducts() {
       </Row>
     );
 
-  return <Layout>{content}</Layout>;
+  return <Layout title={`e-Shop -Products`}>{content}</Layout>;
 }
 
 export default AllCategoriesProducts;

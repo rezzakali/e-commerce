@@ -33,9 +33,11 @@ function Orders() {
     return moment(deliveryDate.toISOString()).format('ll'); // return the delivery date in ISO format
   }
 
+  let grandTotal = 0;
+
   return (
     <Layout
-      title={'Orders - e-shop'}
+      title={'e-Shop -Your Orders'}
       keywords={''}
       author={'Rezzak'}
       description={'orders page'}
@@ -75,22 +77,17 @@ function Orders() {
                   <thead
                     className="sticky-top bg-light"
                     style={{ zIndex: '100' }}
-                  >
-                    <tr>
-                      <th></th>
-                      <th>Product</th>
-                      <th>Status</th>
-                      <th>Shipping address</th>
-                    </tr>
-                  </thead>
+                  ></thead>
                   <tbody>
                     {orders?.orders?.map((order) => {
                       const products = order.products.map((product) => {
-                        const { quantity, productId, productName } = product;
+                        const { quantity, productId, productName, price } =
+                          product;
                         return {
                           quantity,
                           productId,
                           productName,
+                          price,
                         };
                       });
                       const {
@@ -101,6 +98,8 @@ function Orders() {
                         shipping,
                       } = order;
 
+                      grandTotal += total;
+
                       return (
                         <tr
                           key={order._id}
@@ -109,29 +108,32 @@ function Orders() {
                             verticalAlign: 'middle',
                           }}
                         >
-                          {products.map((product, index) => (
-                            <React.Fragment key={index}>
-                              <td>
-                                <span>{product._id}</span>
-                                <img
-                                  src={`http://127.0.0.1:9000/api/v1/products/get-product-image/${product.productId}`}
-                                  alt="product_image"
-                                  style={{
-                                    width: '60px',
-                                    height: '80px',
-                                  }}
-                                />
-                              </td>
-                              <td style={{ textTransform: 'uppercase' }}>
-                                {product.productName}
-                                <br />
-                                <span>Qty : {product.quantity}</span>
-                                <span className="text-center d-flex align-items-center justify-content-center fw-bold">
-                                  ₹ {total.toLocaleString()}
-                                </span>
-                              </td>
-                            </React.Fragment>
-                          ))}
+                          {products.map((product, index) => {
+                            return (
+                              <React.Fragment key={index}>
+                                <td>
+                                  <img
+                                    src={`http://127.0.0.1:9000/api/v1/products/get-product-image/${product.productId}`}
+                                    alt="product_image"
+                                    style={{
+                                      width: '60px',
+                                      height: '80px',
+                                    }}
+                                  />
+                                </td>
+                                <td style={{ textTransform: 'uppercase' }}>
+                                  {product.productName}
+                                  <br />
+                                  <span>Qty : {product.quantity}</span>
+                                  <br />
+                                  <span className="fw-bold">
+                                    {' '}
+                                    ₹ {product.price * product.quantity}.00
+                                  </span>
+                                </td>
+                              </React.Fragment>
+                            );
+                          })}
                           <td>
                             Status: <br />
                             <span
@@ -167,9 +169,14 @@ function Orders() {
                   </tbody>
                 </Table>
               </div>
-              <p className="mt-2">
-                Payment status: <span className="text-success">paid</span>{' '}
-              </p>
+              <div className="d-flex align-items-center justify-content-between">
+                <p className="mt-2">
+                  Payment Status: <span className="text-success">Paid </span>{' '}
+                </p>
+                <p className="fw-bold">
+                  Total Paid: ₹ {grandTotal.toLocaleString()}.00
+                </p>
+              </div>
             </>
           )}
         </Col>

@@ -8,7 +8,7 @@ function TextInput({ icon, placeholder, className, as, ...rest }) {
       {as !== 'textarea' && icon && <InputGroup.Text>{icon}</InputGroup.Text>}
       <Form.Control
         placeholder={placeholder}
-        className={`className ${styles.text_input}`}
+        className={` className ${styles.text_input}`}
         {...rest}
       />
     </InputGroup>

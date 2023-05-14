@@ -7,7 +7,7 @@ import Layout from '../components/Layout';
 function Home() {
   return (
     <Layout
-      title={'Home - e-shop'}
+      title={'e-Shop -Home'}
       description={'this is home page'}
       keywords={'home page,clothes, shoes, clocks, kurta pyjama, lehenga choli'}
       author={'Rezzak'}

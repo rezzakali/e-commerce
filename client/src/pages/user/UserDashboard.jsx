@@ -6,17 +6,15 @@ import UserProfile from './UserProfile';
 
 function UserDashboard() {
   return (
-    <Layout title="User-dashboard">
-      <Row className="pt-1" style={{ height: '100vh' }}>
-        <Col sm={12} md={2} lg={2} className="shadow-sm">
+    <Layout title="e-Shop -User Dashboard">
+      <Row className="p-1">
+        <Col sm={12} md={2} lg={2}>
           <UserSidebar />
         </Col>
-        <Col sm={12} md={10} lg={10} className="">
-          <div className="m-5">
-            <h4>Profile</h4>
-            <hr />
-            <UserProfile />
-          </div>
+        <Col sm={12} md={10} lg={10} className="p-3 shadow-sm">
+          <h4>Profile</h4>
+          <hr />
+          <UserProfile />
         </Col>
       </Row>
     </Layout>

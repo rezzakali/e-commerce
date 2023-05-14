@@ -3,6 +3,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useUpdateUserInfoMutation } from '../features/auth/authApi';
+import styles from '../styles/ProductCardButton.module.css';
 import TextInput from './TextInput';
 
 function UserProfileUpdateModal({ show, handleClose, setShow }) {
@@ -52,7 +53,7 @@ function UserProfileUpdateModal({ show, handleClose, setShow }) {
       onHide={handleClose}
       backdrop="static"
       keyboard={false}
-      centered
+      top="true"
     >
       <Modal.Header closeButton>
         <h5>Update your profile</h5>
@@ -105,7 +106,7 @@ function UserProfileUpdateModal({ show, handleClose, setShow }) {
           />
           <br />
           <Button
-            className="w-100 bg-light text-dark border border-gray"
+            className={`w-100  border border-gray ${styles.product_card_button}`}
             size="sm"
             type="submit"
           >

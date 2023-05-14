@@ -11,7 +11,7 @@ import TextInput from '../components/TextInput';
 function Contact() {
   return (
     <Layout
-      title={'Contact Us - e-shop'}
+      title={'e-Shop -Contact Us'}
       description={'Contact us page'}
       author={'Rezzak'}
       keywords={'contact us, learn more, how to chat with e-shop'}

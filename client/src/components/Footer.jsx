@@ -45,7 +45,7 @@ function Footer() {
   return (
     <footer
       className="container-fluid bg-dark text-white pt-4 pb-1"
-      style={{ position: 'relative', zIndex: 100 }}
+      style={{ position: 'relative' }}
     >
       <Container fluid>
         <Row>

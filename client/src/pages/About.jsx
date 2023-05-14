@@ -6,7 +6,7 @@ import Layout from '../components/Layout';
 function About() {
   return (
     <Layout
-      title={'About Us e-shop'}
+      title={'e-Shop -About Us'}
       author={'Rezzak'}
       description={'this is about us page'}
       keywords={'about us, about company, e-shop'}

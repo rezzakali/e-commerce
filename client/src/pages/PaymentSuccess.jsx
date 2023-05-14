@@ -17,7 +17,7 @@ function PaymentSuccess() {
   }, [dispatch]);
 
   return (
-    <Layout>
+    <Layout title={`e-Shop -Payment Success`}>
       <h3 className="text-center p-5">Your order has been received</h3>
       <div
         className="d-flex align-items-center justify-content-center flex-column p-5"

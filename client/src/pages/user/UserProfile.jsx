@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import TextInput from '../../components/TextInput';
 import UserProfileUpdateModal from '../../components/UserProfileUpdateModal';
 import { useUpdateUserProfilePictureMutation } from '../../features/auth/authApi';
+import styles from '../../styles/ProductCardButton.module.css';
 
 function UserProfile() {
   const [profile, setProfile] = useState();
@@ -52,7 +53,7 @@ function UserProfile() {
   }, [isError, response]);
 
   return (
-    <Row className="p-5 shadow-sm mx-auto">
+    <Row className="p-5">
       <Col sm={6} md={6} lg={3}>
         <div style={{ position: 'relative' }}>
           {isLoading ? (
@@ -116,12 +117,11 @@ function UserProfile() {
           handleShow={handleShow}
           setShow={setShow}
         />
-        <div className="d-flex align-items-center justify-content-end">
+        <div className="d-flex align-items-center justify-content-between mb-2">
           <Button
             onClick={() => setShow(true)}
-            className="bg-light text-dark border border-gray"
+            className={`bg-yellow border border-gray mb-5 ${styles.product_card_button}`}
             size="sm"
-            type="submit"
           >
             Update Profile
           </Button>

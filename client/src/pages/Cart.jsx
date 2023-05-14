@@ -56,13 +56,7 @@ function Cart() {
   // payment handler
   const handlePayment = () => {
     const newCartItems = cartItems.map((item) => {
-      const {
-        description,
-        createdAt,
-        updatedAt,
-        quantity,
-        ...rest
-      } = item;
+      const { description, createdAt, updatedAt, quantity, ...rest } = item;
       return rest;
     });
     payment({ cartItems: newCartItems, userId: user?._id });
@@ -82,7 +76,7 @@ function Cart() {
 
   return (
     <Layout
-      title={'Cart - e-shop'}
+      title={'e-Shop -Cart'}
       keywords={'men,shirt, t-shirt, kurta pyjama'}
       author={'Rezzak'}
       description={'cart page'}

@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Button, Row } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
 import { AiFillLock } from 'react-icons/ai';
 import { GrMail } from 'react-icons/gr';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import loginImage from '../assets/signin.png';
 import ForgotPasswordModal from '../components/ForgotPasswordModal';
 import Layout from '../components/Layout';
 import TextInput from '../components/TextInput';
 import { useLoginMutation } from '../features/auth/authApi';
+import styles from '../styles/ProductCardButton.module.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -46,16 +46,16 @@ function Login() {
 
   return (
     <Layout>
-      <Row className="p-3">
-        <Col sm={12} md={6} lg={6}>
-          <img
-            src={loginImage}
-            alt="login image"
-            className="object-fit-cover h-100 w-100"
-          />
-        </Col>
-        <Col sm={12} md={6} lg={6}>
-          <h1 className="my-5">Login</h1>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '70vh',
+        }}
+      >
+        <Row>
+          <h4 className="py-1">Login</h4>
           <form onSubmit={handleSubmit}>
             <TextInput
               type="email"
@@ -81,8 +81,9 @@ function Login() {
             <br />
             <Button
               type="submit"
-              className="w-100 bg-light text-dark border border-gray"
+              className={`w-100 border border-gray ${styles.product_card_button}`}
               disabled={isLoading}
+              size="sm"
             >
               {isLoading ? (
                 <span
@@ -114,8 +115,8 @@ function Login() {
               </NavLink>
             </div>
           </div>
-        </Col>
-      </Row>
+        </Row>
+      </div>
     </Layout>
   );
 }
