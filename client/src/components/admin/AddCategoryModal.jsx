@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
 import { useAddCategoryMutation } from '../../features/category/categoryApi';
+import styles from '../../styles/ProductCardButton.module.css';
 import TextInput from '../TextInput';
 
 function AddCategoryModal({ show, handleClose }) {
@@ -52,7 +53,11 @@ function AddCategoryModal({ show, handleClose }) {
             onChange={(e) => setName(e.target.value)}
           />
           <br />
-          <Button className="w-auto bg-success" size="sm" type="submit">
+          <Button
+            className={`w-auto ${styles.product_card_button}`}
+            size="sm"
+            type="submit"
+          >
             {isLoading ? (
               <span
                 className="spinner-border spinner-border-sm"

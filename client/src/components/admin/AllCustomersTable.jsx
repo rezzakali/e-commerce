@@ -44,10 +44,10 @@ function AllCustomersTable() {
 
   if (!isLoading && !isError && users?.users?.length > 0)
     content = users?.users.map(
-      ({ _id, name, email, phone, address, createdAt }) => {
+      ({ _id, name, email, phone, address, createdAt }, index) => {
         return (
           <tr key={_id}>
-            <td>{_id}</td>
+            <td>{index + 1}</td>
             <td>{name}</td>
             <td>{email}</td>
             <td>{phone}</td>
@@ -70,7 +70,7 @@ function AllCustomersTable() {
       {!isLoading && users?.users?.length !== 0 && (
         <thead className="sticky-top bg-light" style={{ zIndex: '100' }}>
           <tr>
-            <th>_id</th>
+            <th>#</th>
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>

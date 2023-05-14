@@ -7,6 +7,7 @@ import contactImage from '../assets/contact.jpg';
 import GoogleMap from '../components/GoogleMap';
 import Layout from '../components/Layout';
 import TextInput from '../components/TextInput';
+import styles from '../styles/ProductCardButton.module.css';
 
 function Contact() {
   return (
@@ -35,21 +36,17 @@ function Contact() {
         <Col sm={12} md={6} lg={6} className="py-5">
           <form>
             <TextInput
-              className="mb-3"
-              placeholder="full name"
+              placeholder={`full name`}
               icon={<FaUserAlt />}
+              required
             />
             <br />
-            <TextInput
-              className="mb-3"
-              placeholder="email address"
-              icon={<GrMail />}
-            />
+            <TextInput placeholder="email address" icon={<GrMail />} required />
             <br />
             <TextInput
-              className="mb-3"
               placeholder="phone"
               icon={<BsTelephoneInboundFill />}
+              required
             />
             <br />
             <TextInput
@@ -58,7 +55,10 @@ function Contact() {
               style={{ height: '120px' }}
             />
             <br />
-            <Button className="w-100 bg-light text-dark border border-gray">
+            <Button
+              className={`w-100 border border-gray ${styles.product_card_button}`}
+              type="submit"
+            >
               Send
             </Button>
           </form>

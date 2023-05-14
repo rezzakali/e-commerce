@@ -90,7 +90,7 @@ function ProductsTable() {
     );
 
   if (!isLoading && !isError && products?.products?.length > 0)
-    content = products.products.map((product) => {
+    content = products.products.map((product, index) => {
       const {
         _id: id,
         category,
@@ -104,7 +104,7 @@ function ProductsTable() {
 
       return (
         <tr key={id}>
-          <td>{id}</td>
+          <td>{index + 1}</td>
           <td>{name}</td>
           <td>
             <img
@@ -143,7 +143,7 @@ function ProductsTable() {
         {!isLoading && products?.products?.length !== 0 && (
           <thead className="sticky-top bg-light" style={{ zIndex: '100' }}>
             <tr>
-              <th>_id</th>
+              <th>#</th>
               <th>Name</th>
               <th>Image</th>
               <th>Price</th>

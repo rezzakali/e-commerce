@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { setSearchTerm } from '../features/filter/filterSlice';
 import styles from '../styles/SearchForm.module.css';
@@ -14,14 +14,8 @@ function SearchForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(setSearchTerm(input));
-    setInput('');
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.keyCode === 13) {
-      handleSubmit(e);
-    }
+    const value = input.trim().replace(/\s+/g, ' ').toLowerCase();
+    dispatch(setSearchTerm(value));
   };
 
   return (
@@ -32,13 +26,19 @@ function SearchForm() {
       <Form.Control
         type="search"
         size="sm"
-        placeholder="Search by name only"
+        placeholder="Search"
         className={`rounded-0 w-100 ${styles.search_form}`}
         aria-label="Search"
         value={input}
         onChange={handleChange}
-        onKeyDown={handleKeyDown}
       />
+      <Button
+        type="submit"
+        size="sm"
+        className="mx-1 bg-light text-dark border rounded-0"
+      >
+        Search
+      </Button>
     </Form>
   );
 }

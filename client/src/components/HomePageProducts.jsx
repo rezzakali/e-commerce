@@ -70,7 +70,12 @@ function HomePageProducts() {
           {filteredProducts
             ?.filter((p) => {
               if (searchTerm === '') return p;
-              return p.name.toLowerCase().includes(searchTerm.toLowerCase());
+              const regex = new RegExp(searchTerm, 'i');
+              return (
+                regex.test(p.name.toLowerCase()) ||
+                regex.test(p.description.toLowerCase()) ||
+                regex.test(p.price)
+              );
             })
             .map((product) => (
               <ProductCard key={product._id} product={product} />

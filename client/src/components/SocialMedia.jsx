@@ -10,7 +10,7 @@ import { NavLink } from 'react-router-dom';
 function SocialMedia() {
   return (
     <div className="d-flex gap-3 ">
-      <NavLink to="#">
+      <NavLink to="https://twitter.com/rezzak_2" target="_blank">
         <span>
           <AiOutlineTwitter className="text-white" size={24} />
         </span>
@@ -20,12 +20,12 @@ function SocialMedia() {
           <AiFillFacebook className="text-white" size={24} />
         </span>
       </NavLink>
-      <NavLink to="#">
+      <NavLink to="https://www.instagram.com/rezzak134" target="_blank">
         <span>
           <AiOutlineInstagram className="text-white" size={24} />
         </span>
       </NavLink>
-      <NavLink to="#">
+      <NavLink to="https://www.linkedin.com/in/rezzak" target="_blank">
         <span>
           <AiFillLinkedin className="text-white" size={24} />
         </span>

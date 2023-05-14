@@ -65,11 +65,11 @@ function CategoriesTable() {
       </tr>
     );
   if (!isLoading && !isError && categories?.categories?.length > 0)
-    content = categories.categories.map((item) => {
+    content = categories.categories.map((item, index) => {
       const { name, slug, _id } = item;
       return (
         <tr key={_id}>
-          <td>{_id}</td>
+          <td>{index + 1}</td>
           <td>{name}</td>
           <td>{slug}</td>
           <td>
@@ -101,7 +101,7 @@ function CategoriesTable() {
         {!isLoading && categories?.categories?.length !== 0 && (
           <thead className="sticky-top bg-light" style={{ zIndex: '100' }}>
             <tr>
-              <th>_id</th>
+              <th>#</th>
               <th>Name</th>
               <th>Slug</th>
               <th>Operation</th>

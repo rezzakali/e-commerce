@@ -6,7 +6,7 @@ import {
   useAddProductMutation,
   useUpdateProductMutation,
 } from '../../features/product/productApi';
-import styles from '../../styles/TextInput.module.css';
+import styles from '../../styles/ProductCardButton.module.css';
 import TextInput from '../TextInput';
 
 function AddProductModal({
@@ -231,7 +231,11 @@ function AddProductModal({
             <option value="no">No</option>
           </Form.Select>
           <br />
-          <Button className="w-auto bg-success" size="sm" type="submit">
+          <Button
+            className={`w-auto ${styles.product_card_button}`}
+            size="sm"
+            type="submit"
+          >
             {isLoading || editIsLoading ? (
               <span
                 className="spinner-border spinner-border-sm"

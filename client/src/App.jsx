@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import AdminRouteProtect from './admin/AdminDashboard';
 import ScrollToTopButton from './components/ScrollToTop';
+import Terms from './components/Terms';
 import UserPrivateRoute from './components/routes/UserPrivateRoute';
 import useAuthCheck from './hooks/useAuthCheck';
 import About from './pages/About';
@@ -15,7 +16,10 @@ import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import Orders from './pages/Orders';
 import PaymentSuccess from './pages/PaymentSuccess';
+import Privacy from './pages/Privacy';
+import Refund from './pages/Refund';
 import Register from './pages/Register';
+import Shipping from './pages/Shipping';
 import SingleProduct from './pages/SingleProduct';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminOrders from './pages/admin/AdminOrders';
@@ -70,6 +74,10 @@ function App() {
         {/* login / register */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/refund" element={<Refund />} />
+        <Route path="/shipping" element={<Shipping />} />
+        <Route path="/terms" element={<Terms />} />
 
         {/* payment success */}
         <Route path="/payment-success" element={<PaymentSuccess />} />

@@ -12,32 +12,32 @@ function Footer() {
   const informationItems = [
     {
       id: 1,
-      link: '/',
+      link: '/about',
       title: 'About',
     },
     {
       id: 2,
-      link: '/',
+      link: '/contact',
       title: 'Contact',
     },
     {
       id: 3,
-      link: '/',
+      link: '/privacy',
       title: 'Privacy Policy',
     },
     {
       id: 4,
-      link: '/',
+      link: '/refund',
       title: 'Refund & Exchange',
     },
     {
       id: 5,
-      link: '/',
+      link: '/shipping',
       title: 'Delivery & Shipping',
     },
     {
       id: 6,
-      link: '/',
+      link: '/terms',
       title: 'Terms & Conditions',
     },
   ];
@@ -50,12 +50,13 @@ function Footer() {
       <Container fluid>
         <Row>
           <Col sm={12} md={6} lg={3}>
-            <h5 className="text-uppercase">About e-shop</h5>
+            <h5 className="text-uppercase">About Company</h5>
             <p className="text-justify">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Voluptatum illum quod dignissimos odio repellat labore debitis
-              ullam ea. Dolorum, repellendus voluptates. Vitae earum, magnam
-              officiis vero excepturi architecto unde illo.
+              E-SHOP is a reliable e-commerce platform that offers customers a
+              wide range of high-quality products at competitive prices. With
+              fast and secure payment methods, easy navigation, and excellent
+              customer service, E-SHOP is the perfect destination for all your
+              online shopping needs.
             </p>
           </Col>
           <Col sm={12} md={6} lg={3}>
@@ -107,7 +108,7 @@ function Footer() {
               to="https://developer-rezzak.vercel.app"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-decoration-none"
+              className="text-decoration-none text-warning"
             >
               Rezzak
             </NavLink>

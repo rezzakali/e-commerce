@@ -33,6 +33,7 @@ function SingleProduct() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { searchTerm } = useSelector((state) => state.filter);
 
   const [totalCartQuantity, setTotalCartQuantity] = useState(0);
 
@@ -99,9 +100,19 @@ function SingleProduct() {
         <p className="fs-4" style={{ textTransform: 'uppercase' }}>
           similar Products
         </p>
-        {similarProducts?.products?.map((product) => (
-          <ProductCard key={product._id} product={product} />
-        ))}
+        {similarProducts?.products
+          ?.filter((p) => {
+            if (searchTerm === '') return p;
+            const regex = new RegExp(searchTerm, 'i');
+            return (
+              regex.test(p.name.toLowerCase()) ||
+              regex.test(p.description.toLowerCase()) ||
+              regex.test(p.price)
+            );
+          })
+          ?.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
       </Row>
     </Layout>
   );
