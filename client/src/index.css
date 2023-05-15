@@ -1,6 +1,8 @@
 body {
   background-color: #f6f7f8;
   overflow-x: hidden;
+  font-family: 'Montserrat', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .scroll-to-top {
@@ -47,4 +49,21 @@ body {
   box-shadow: none;
   outline: none;
   border: none;
+}
+
+/* slider */
+.aws-btn {
+  --slider-height-percentage: 41%;
+  --slider-transition-duration: 575ms;
+  --organic-arrow-thickness: 2px;
+  --organic-arrow-border-radius: 0px;
+  --organic-arrow-height: 19px;
+  --organic-arrow-color: #cf3438;
+  --control-button-width: 8%;
+  --control-button-height: 27%;
+  --control-button-background: transparent;
+  --control-bullet-color: #f33d42;
+  --control-bullet-active-color: #cf3438;
+  --loader-bar-color: #e84e4e;
+  --loader-bar-height: 3px;
 }
