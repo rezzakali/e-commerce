@@ -45,7 +45,7 @@ function Login() {
   }, [isSuccess, isError, data]);
 
   return (
-    <Layout>
+    <Layout title={`e-Shop - Login`}>
       <div
         style={{
           display: 'flex',

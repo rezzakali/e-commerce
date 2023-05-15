@@ -37,13 +37,7 @@ function ForgotPasswordModal({ show, handleClose, setShow }) {
   }, [isSuccess, isError]);
 
   return (
-    <Modal
-      show={show}
-      onHide={handleClose}
-      backdrop="static"
-      keyboard={false}
-      centered
-    >
+    <Modal show={show} onHide={handleClose} backdrop="static" keyboard={true}>
       <Modal.Header closeButton>
         <h5>Reset your password</h5>
       </Modal.Header>

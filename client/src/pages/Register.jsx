@@ -79,7 +79,7 @@ function Register() {
   }, [isSuccess, isError, data]);
 
   return (
-    <Layout title={`e-Shop -Register`}>
+    <Layout title={`e-Shop - Register`}>
       <div
         style={{
           display: 'flex',
