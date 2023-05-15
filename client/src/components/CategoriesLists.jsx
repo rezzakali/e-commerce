@@ -12,8 +12,8 @@ function CategoriesLists() {
         <ul>
           {categories?.categories?.map((item) => (
             <li key={item._id}>
-              <LinkContainer to={item.slug}>
-                <Nav.Link to={item.slug}>{item.name}</Nav.Link>
+              <LinkContainer to={`/category/${item.slug}`}>
+                <Nav.Link to={`/category/${item.slug}`}>{item.name}</Nav.Link>
               </LinkContainer>
             </li>
           ))}

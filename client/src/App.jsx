@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import CookieConsent from 'react-cookie-consent';
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import AdminRouteProtect from './admin/AdminDashboard';
@@ -103,6 +104,14 @@ function App() {
       {showScrollButton && <ScrollToTopButton />}
 
       <ToastContainer position="bottom-left" autoClose={3000} />
+
+      <CookieConsent
+        location="bottom"
+        buttonText="Accept Cookies"
+        buttonStyle={{ color: '#e84e4e' }}
+      >
+        This website uses cookies to enhance the user experience.
+      </CookieConsent>
     </React.Fragment>
   );
 }
