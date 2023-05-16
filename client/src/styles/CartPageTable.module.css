@@ -1,0 +1,18 @@
+.table_container {
+  height: 500px;
+  overflow-y: scroll;
+}
+
+.table_container::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f5f5f5;
+  visibility: hidden; /* hide scrollbar by default */
+}
+
+.table_container:hover::-webkit-scrollbar {
+  visibility: visible; /* show scrollbar when hovered over */
+}
+
+.table_container::-webkit-scrollbar-thumb {
+  background-color: #e4dcdc;
+}

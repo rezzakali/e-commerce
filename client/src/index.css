@@ -1,0 +1,67 @@
+body {
+  background-color: #f6f7f8;
+  overflow-x: hidden;
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  background-color: rgba(230, 62, 62, 0.918);
+  color: #fff;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+}
+
+.scroll-to-top:hover {
+  background-color: rgba(231, 43, 43, 0.74);
+}
+
+.show-scroll-button {
+  display: flex;
+}
+
+/* pagination button */
+#pagination_button:active,
+#pagination_button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* category dropdown menu active  */
+.dropdown-item.active {
+  background-color: rgba(231, 43, 43, 0.74);
+}
+
+/* quantity input text */
+#quantity_input {
+  width: 60px;
+  border: none;
+}
+#quantity_input:active,
+#quantity_input:focus {
+  box-shadow: none;
+  outline: none;
+  border: none;
+}
+
+/* slider */
+.aws-btn {
+  --slider-height-percentage: 41%;
+  --slider-transition-duration: 575ms;
+  --organic-arrow-thickness: 2px;
+  --organic-arrow-border-radius: 0px;
+  --organic-arrow-height: 19px;
+  --organic-arrow-color: #cf3438;
+  --control-button-width: 8%;
+  --control-button-height: 27%;
+  --control-button-background: transparent;
+  --control-bullet-color: #f33d42;
+  --control-bullet-active-color: #cf3438;
+  --loader-bar-color: #e84e4e;
+  --loader-bar-height: 3px;
+}

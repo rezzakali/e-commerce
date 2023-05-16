@@ -1,0 +1,8 @@
+.product_card_button {
+  border: none;
+  background-color: rgba(230, 62, 62, 0.918);
+}
+
+.product_card_button:hover {
+  background-color: rgba(231, 43, 43, 0.74);
+}

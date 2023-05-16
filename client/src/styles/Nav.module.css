@@ -1,0 +1,12 @@
+.navbar_toggler {
+  border: none;
+}
+.navbar_toggler:focus,
+.navbar_toggler:active,
+.navbar_toggler-icon:focus {
+  outline: none;
+  box-shadow: none;
+}
+.nav_underline {
+  border-bottom: 1px solid #e84e4e;
+}
